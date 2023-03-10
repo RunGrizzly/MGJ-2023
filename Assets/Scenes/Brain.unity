@@ -319,7 +319,7 @@ MonoBehaviour:
       editorAssetGUID: dbaa0dc4f95b8454c833fa0d5744ecfa
       name: Camera
       _path: Assets/Scenes/Camera.unity
-    loadInEditor: 0
+    loadInEditor: 1
     loadMethod: 3
   - scene:
       editorAssetGUID: c07168c1cc5dbd749bc67c17d297231f
