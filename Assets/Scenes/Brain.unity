@@ -301,6 +301,12 @@ MonoBehaviour:
       _path: Assets/Scenes/UI.unity
     loadInEditor: 1
     loadMethod: 1
+  - scene:
+      editorAssetGUID: 7212354b96a20304eb041a3d0ffd1b53
+      name: Grid
+      _path: Assets/Scenes/Grid.unity
+    loadInEditor: 1
+    loadMethod: 1
   _isMainScene: 0
   _version: 1
   _thisScenePath: Assets/Scenes/Brain.unity
