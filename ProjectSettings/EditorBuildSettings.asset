@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI.unity
     guid: b731753d08977304b8e6c106e0a32367
+  - enabled: 1
+    path: Assets/Scenes/Camera.unity
+    guid: dbaa0dc4f95b8454c833fa0d5744ecfa
   m_configObjects: {}

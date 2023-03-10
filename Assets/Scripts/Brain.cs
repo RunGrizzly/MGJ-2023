@@ -10,4 +10,8 @@ public class Brain : MonoBehaviour
     {
         ins = this;
     }
+
+    [SerializeField] private SceneLoader m_sceneLoader = null;
+
+
 }
