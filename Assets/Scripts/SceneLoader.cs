@@ -13,12 +13,21 @@ public class SceneLoader : MonoBehaviour
     {
         LoadScenes(new List<string> { "MainMenu" });
     }
+    public void LoadBattleScene()
+    {
+        UnloadScenes(new List<string> { "MainMenu" });
+        LoadScenes(new List<string> { "Camera" });
+        LoadScenes(new List<string> { "BattleScene" });
+    }
 
     void LoadScenes(List<string> scenes)
     {
         foreach (string name in scenes)
         {
-            SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
+            if (!SceneManager.GetSceneByName(name).isLoaded)
+            {
+                SceneManager.LoadSceneAsync(name, LoadSceneMode.Additive);
+            }
         }
     }
 
@@ -26,7 +35,10 @@ public class SceneLoader : MonoBehaviour
     {
         foreach (string name in scenes)
         {
-            SceneManager.UnloadSceneAsync(name);
+            if (SceneManager.GetSceneByName(name).isLoaded)
+            {
+                SceneManager.UnloadSceneAsync(name);
+            }
         }
     }
 }

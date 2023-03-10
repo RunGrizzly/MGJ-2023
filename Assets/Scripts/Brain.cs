@@ -11,7 +11,7 @@ public class Brain : MonoBehaviour
         ins = this;
     }
 
-    [SerializeField] private SceneLoader m_sceneLoader = null;
+    [field: SerializeField] public SceneLoader SceneLoader { get; set; } = null;
 
 
 }

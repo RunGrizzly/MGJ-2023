@@ -189,9 +189,9 @@ Shader "FoliUIBasic"
 }
 /*ASEBEGIN
 Version=18935
-2560;0;1920;1059;1845.295;2685.396;2.263353;True;False
+2228.667;72.66667;1150;931;6006.614;882.501;1.310923;False;False
 Node;AmplifyShaderEditor.RangedFloatNode;37;-3679.426,-358.4543;Inherit;False;Constant;_LeftShift;LeftShift;6;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;30;-4142.827,67.84425;Inherit;False;Property;_PauseLength;Pause Length;4;0;Create;True;0;0;0;False;0;False;1;0;0;10;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;30;-4142.827,67.84425;Inherit;False;Property;_PauseLength;Pause Length;4;0;Create;True;0;0;0;False;0;False;1;0.16;0;10;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleTimeNode;44;-3757.126,-228.4556;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;19;-3464.426,-251.4556;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleDivideOpNode;28;-3539.915,-94.94071;Inherit;False;2;0;FLOAT;1;False;1;FLOAT;10;False;1;FLOAT;0
@@ -202,7 +202,7 @@ Node;AmplifyShaderEditor.RangedFloatNode;38;-2910.218,-463.6964;Inherit;False;Co
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;21;-2914.833,-328.8225;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.PiNode;31;-3707.518,130.6022;Inherit;False;1;0;FLOAT;2;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;22;-2735.219,-390.6964;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;33;-3423.468,-845.2324;Inherit;False;Property;_ShineSpeed;ShineSpeed;5;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;33;-3423.468,-845.2324;Inherit;False;Property;_ShineSpeed;ShineSpeed;5;0;Create;True;0;0;0;False;0;False;0;-0.1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleDivideOpNode;27;-3303.923,131.4504;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SignOpNode;35;-2433.028,-501.4553;Inherit;False;1;0;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.StepOpNode;34;-2286.427,-503.6543;Inherit;False;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
@@ -212,27 +212,29 @@ Node;AmplifyShaderEditor.SimpleRemainderNode;23;-2541.244,-760.7063;Inherit;Fals
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;36;-2094.146,-502.4133;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;15;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;40;-1916.803,-761.9473;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.ClampOpNode;41;-1677.744,-582.8032;Inherit;True;3;0;FLOAT;0;False;1;FLOAT;-20;False;2;FLOAT;20;False;1;FLOAT;0
-Node;AmplifyShaderEditor.RangedFloatNode;24;-1819.817,-1107.603;Inherit;False;Property;_Offset;Offset;3;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;24;-1819.817,-1107.603;Inherit;False;Property;_Offset;Offset;3;0;Create;True;0;0;0;False;0;False;0;1;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;25;-1434.825,-1099.5;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.TemplateShaderPropertyNode;74;-428.8052,-2310.1;Inherit;False;0;0;_MainTex;Shader;False;0;5;SAMPLER2D;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.TexCoordVertexDataNode;16;-1551.026,-1494.324;Inherit;False;0;2;0;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
-Node;AmplifyShaderEditor.RangedFloatNode;47;-1524.215,-1315.734;Inherit;False;Property;_Tile;Tile;2;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;47;-1524.215,-1315.734;Inherit;False;Property;_Tile;Tile;2;0;Create;True;0;0;0;False;0;False;0;5.73;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SamplerNode;4;-122.4879,-2055.385;Inherit;True;Property;_TextureSample;Texture Sample;3;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;0,0,0,0;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.ScaleAndOffsetNode;17;-1167.027,-1332.198;Inherit;False;3;0;FLOAT2;0,0;False;1;FLOAT;1;False;2;FLOAT;0;False;1;FLOAT2;0
-Node;AmplifyShaderEditor.RangedFloatNode;48;-938.7225,-1148.888;Inherit;False;Property;_ShineAngle;ShineAngle;0;0;Create;True;0;0;0;False;0;False;0;38.53;0;0;0;1;FLOAT;0
-Node;AmplifyShaderEditor.TexturePropertyNode;45;-950.6431,-1569.174;Inherit;True;Property;_ShineShape;ShineShape;1;1;[NoScaleOffset];Create;True;0;0;0;False;0;False;None;None;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
+Node;AmplifyShaderEditor.RangedFloatNode;48;-938.7225,-1148.888;Inherit;False;Property;_ShineAngle;ShineAngle;0;0;Create;True;0;0;0;False;0;False;0;1.51;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.TexturePropertyNode;45;-950.6431,-1569.174;Inherit;True;Property;_ShineShape;ShineShape;1;1;[NoScaleOffset];Create;True;0;0;0;False;0;False;None;c3512c25766a40245ac94c6b1722d76e;False;white;Auto;Texture2D;-1;0;2;SAMPLER2D;0;SAMPLERSTATE;1
 Node;AmplifyShaderEditor.RotatorNode;46;-652.0178,-1332.712;Inherit;False;3;0;FLOAT2;0,0;False;1;FLOAT2;0.5,0.5;False;2;FLOAT;1;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.DynamicAppendNode;63;329.3631,-2093.905;Inherit;False;FLOAT4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;0;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.SamplerNode;42;-420.6861,-1563.729;Inherit;True;Property;_TextureSample1;Texture Sample 1;7;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.RGBToHSVNode;9;599.4436,-2169.671;Float;False;1;0;FLOAT3;0,0,0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
 Node;AmplifyShaderEditor.SimpleAddOpNode;43;907.758,-2094.676;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.HSVToRGBNode;61;1070.976,-2141.292;Inherit;False;3;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;4;FLOAT3;0;FLOAT;1;FLOAT;2;FLOAT;3
-Node;AmplifyShaderEditor.RangedFloatNode;80;1696.014,-1814.219;Inherit;False;Property;_Float0;Float 0;7;0;Create;True;0;0;0;False;0;False;0;0;0;0;0;1;FLOAT;0
+Node;AmplifyShaderEditor.RangedFloatNode;80;1696.014,-1814.219;Inherit;False;Property;_Float0;Float 0;7;0;Create;True;0;0;0;False;0;False;0;6.98;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.TextureCoordinatesNode;81;1786.447,-2257.241;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.DynamicAppendNode;62;1323.46,-2016.082;Inherit;False;FLOAT4;4;0;FLOAT;0;False;1;FLOAT;0;False;2;FLOAT;0;False;3;FLOAT;1;False;1;FLOAT4;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;83;1828.905,-1812.435;Inherit;False;2;2;0;FLOAT;0;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleSubtractOpNode;82;2139.447,-2147.241;Inherit;False;2;0;FLOAT2;0,0;False;1;FLOAT2;0.5,0.5;False;1;FLOAT2;0
 Node;AmplifyShaderEditor.TemplateFragmentDataNode;69;1332.433,-2347.475;Inherit;False;0;0;color;0;5;FLOAT4;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.StickyNoteNode;13;-3392.27,-517.6323;Inherit;False;363;104;Pause Strength (A);;1,1,1,1;The strength of the multiplier that is output. It's fine being 1;0;0
+Node;AmplifyShaderEditor.StickyNoteNode;11;-4266.915,-63.94072;Inherit;False;363;104;Pause Length/Frequency (B);;1,1,1,1;Pause length must be a minimum of 1 to allow the period to finish. We divide by 1 to make the number more intuitive;0;0
 Node;AmplifyShaderEditor.TexCoordVertexDataNode;78;1818.447,-2381.241;Inherit;False;0;2;0;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.StickyNoteNode;12;-4680.569,-557.9323;Inherit;False;516.3999;302.9;Shine Wave;;1,1,1,1;Follows the basic formula of y = ASin(B(x+C))+D$$A is the gamut of the wave - its min max$B is the frequency of the wave$C is the phase shift of the wave$D is the vertical shift of the wave$$We plug the period of the wave into a sawtooth to get a linearly scrolling U component$$We plug the sign of the wave into the sawtooth to define when we want it to move and when we don't - this gives us a pause function between waves;0;0
 Node;AmplifyShaderEditor.DistanceOpNode;75;2135.447,-2316.241;Inherit;False;2;0;FLOAT2;0,0;False;1;FLOAT2;0.5,0.5;False;1;FLOAT;0
@@ -244,8 +246,6 @@ Node;AmplifyShaderEditor.TemplateShaderPropertyNode;6;-1085.127,-2037.3;Inherit;
 Node;AmplifyShaderEditor.StickyNoteNode;10;-3066.835,233.2435;Inherit;False;286.4994;159.6469;Divide by 2;;1,1,1,1;We only want the positve section of the sin wave, so we divide by 2;0;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;29;-3771.114,-106.6407;Inherit;False;2;2;0;FLOAT;1;False;1;FLOAT;0;False;1;FLOAT;0
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;67;1641.672,-2489.555;Inherit;False;2;2;0;FLOAT4;0,0,0,0;False;1;FLOAT4;0,0,0,0;False;1;FLOAT4;0
-Node;AmplifyShaderEditor.StickyNoteNode;13;-3392.27,-517.6323;Inherit;False;363;104;Pause Strength (A);;1,1,1,1;The strength of the multiplier that is output. It's fine being 1;0;0
-Node;AmplifyShaderEditor.StickyNoteNode;11;-4266.915,-63.94072;Inherit;False;363;104;Pause Length/Frequency (B);;1,1,1,1;Pause length must be a minimum of 1 to allow the period to finish. We divide by 1 to make the number more intuitive;0;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;66;2885.083,-2490.824;Float;False;True;-1;2;ASEMaterialInspector;0;6;FoliUIBasic;5056123faa0c79b47ab6ad7e8bf059a4;True;Default;0;0;Default;2;True;True;2;5;False;-1;10;False;-1;2;5;False;-1;10;False;-1;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;-1;False;True;True;True;True;True;0;True;-8;False;False;False;False;False;False;False;True;True;0;True;-4;255;True;-7;255;True;-6;0;True;-3;0;True;-5;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;False;True;2;False;-1;True;0;True;-10;False;True;5;Queue=Transparent=Queue=0;IgnoreProjector=True;RenderType=Transparent=RenderType;PreviewType=Plane;CanUseSpriteAtlas=True;False;False;0;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;2;False;0;;0;0;Standard;0;0;1;True;False;;False;0
 WireConnection;19;0;37;0
 WireConnection;19;1;44;0
@@ -304,4 +304,4 @@ WireConnection;67;1;62;0
 WireConnection;66;0;67;0
 WireConnection;66;1;79;0
 ASEEND*/
-//CHKSM=D6FCBD841801F503A1CC04D30F4527CD618D6C7A
+//CHKSM=77CC992AAC6AB993C3560ABACFF27566E9EE3734
