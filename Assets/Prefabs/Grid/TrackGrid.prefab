@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83033a5c4bd4ce44dbe7331d1701141c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_gridDims: {x: 5, y: 5}
+  m_tileHolder: {fileID: 7030794406023439344, guid: 2c278ee7127ffac40b0bbbc9edc56734,
+    type: 3}
