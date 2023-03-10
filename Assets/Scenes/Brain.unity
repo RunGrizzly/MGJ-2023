@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57189c0ddaffda749a5d37db107708a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_sceneLoader: {fileID: 781916002}
+  <SceneLoader>k__BackingField: {fileID: 781916002}
 --- !u!4 &781916001
 Transform:
   m_ObjectHideFlags: 0
@@ -301,12 +301,6 @@ MonoBehaviour:
       editorAssetGUID: 7fd13de94655a8c4b97ebf96583c2742
       name: MainMenu
       _path: Assets/Scenes/MainMenu.unity
-    loadInEditor: 1
-    loadMethod: 3
-  - scene:
-      editorAssetGUID: b4c889118dd4424479d4706fc996e802
-      name: Overworld
-      _path: Assets/Scenes/Overworld.unity
     loadInEditor: 0
     loadMethod: 3
   - scene:
@@ -326,6 +320,12 @@ MonoBehaviour:
       name: Camera
       _path: Assets/Scenes/Camera.unity
     loadInEditor: 0
+    loadMethod: 3
+  - scene:
+      editorAssetGUID: c07168c1cc5dbd749bc67c17d297231f
+      name: BattleScene
+      _path: Assets/Scenes/BattleScene.unity
+    loadInEditor: 1
     loadMethod: 3
   _isMainScene: 0
   _version: 1
