@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Nakama;
-using Assets.Scripts;
 using System;
 using System.Threading.Tasks;
 
 public class NakamaManager : MonoBehaviour
 {
+    [SerializeField]
     private GameConnection _connection;
-
 
     private async void Start()
     {
@@ -82,7 +81,7 @@ public class NakamaManager : MonoBehaviour
         }
 
         _connection.Init(client, socket, account, session);
-
+        var match = await socket.CreateMatchAsync("frank");
     }
 
     private string GetDeviceId()
