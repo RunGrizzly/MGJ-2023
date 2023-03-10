@@ -2,7 +2,7 @@ Shader /*ase_name*/"Hidden/Templates/Legacy/UIDefault"/*end*/
 {
 	Properties
 	{
-		//[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
+		[PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
 		_Color ("Tint", Color) = (1,1,1,1)
 		
 		_StencilComp ("Stencil Comparison", Float) = 8
