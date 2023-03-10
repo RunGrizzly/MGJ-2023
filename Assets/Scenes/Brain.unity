@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -284,6 +284,12 @@ MonoBehaviour:
   _sceneSetupMode: 0
   _sceneSetup:
   - scene:
+      editorAssetGUID: 7fd13de94655a8c4b97ebf96583c2742
+      name: MainMenu
+      _path: Assets/Scenes/MainMenu.unity
+    loadInEditor: 0
+    loadMethod: 3
+  - scene:
       editorAssetGUID: b4c889118dd4424479d4706fc996e802
       name: Overworld
       _path: Assets/Scenes/Overworld.unity
@@ -300,12 +306,6 @@ MonoBehaviour:
       name: UI
       _path: Assets/Scenes/UI.unity
     loadInEditor: 0
-    loadMethod: 3
-  - scene:
-      editorAssetGUID: 7fd13de94655a8c4b97ebf96583c2742
-      name: MainMenu
-      _path: Assets/Scenes/MainMenu.unity
-    loadInEditor: 1
     loadMethod: 3
   _isMainScene: 0
   _version: 1
