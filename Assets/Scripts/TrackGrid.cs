@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class TrackGrid : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Vector2 m_gridDims = Vector2.zero;
+    TrackTile[,] m_gridTiles = new TrackTile[,] { };
+    [SerializeField] private Transform m_tileHolder = null;
+
+    private void GenerateGrid(Vector2 dimensions)
     {
+        //Figure out if we have manually passed in a new dimension or if we wanna use the inspector value 
+        Vector2 newDimensions = dimensions == null ? m_gridDims : dimensions;
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
+
+
+
 }
