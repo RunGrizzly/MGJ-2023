@@ -1,36 +1,51 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TrackGrid : MonoBehaviour
 {
     [SerializeField] private Vector2Int m_gridDims = Vector2Int.zero;
-    List<GameObject> m_gridTiles;
+    List<GameObject> m_gridTiles =  new List<GameObject>();
     [SerializeField] private GameObject TilePrefab;
+    [SerializeField] private float m_generationSpeed = 0.2f;
 
-    private void Start()
+    public void Start()
     {
-        m_gridTiles = new List<GameObject>();
-        GenerateGrid();
+        StartCoroutine(GenerateGrid());
     }
 
-    private void GenerateGrid(Vector2Int? dimensions = null)
+    public IEnumerator GenerateGrid()
     {
-        //Figure out if we have manually passed in a new dimension or if we wanna use the inspector value
-        var newDimensions = dimensions ?? m_gridDims;
+        if (m_gridTiles.Count > 0)
+        {
+            ClearTiles();
+        }
 
         var counter = 0;
-        for (int x = 0; x < newDimensions.x; x++)
+        for (int x = 0; x < m_gridDims.x; x++)
         {
-            for (int y = 0; y < newDimensions.y; y++)
+            for (int y = 0; y < m_gridDims.y; y++)
             {
-                var tile = Instantiate(TilePrefab, new Vector3(x, 0, y), Quaternion.identity);
-                
-                m_gridTiles.Add(tile);
-                tile.GetComponent<TrackTile>().SetState(counter % 2 == 0 ? TileState.Track : TileState.Empty, new Vector2Int(x, y));
+                TrackTile tile = Instantiate(TilePrefab, new Vector3(x, 0, y), Quaternion.identity).GetComponent<TrackTile>();
 
+                m_gridTiles.Add(tile.gameObject);
+                tile.SetState(counter % 2 == 0 ? TileState.Track : TileState.Empty, new Vector2Int(x, y));
+                
                 counter++;
+                yield return new WaitForSeconds(m_generationSpeed);
             }
         }
+    }
+
+    private void ClearTiles()
+    {
+        foreach (var mGridTile in m_gridTiles)
+        {
+            Destroy(mGridTile);
+        }
+        
+        m_gridTiles.RemoveAll(t => t == null);
+
     }
 }

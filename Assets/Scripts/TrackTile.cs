@@ -18,6 +18,12 @@ public class TrackTile: MonoBehaviour
     private void Start()
     {
         SetTileMesh();
+        StartAnimation();
+    }
+
+    private void StartAnimation()
+    {
+        LeanTween.scale(gameObject, Vector3.one * 1.25f, 0.75f).setEase(LeanTweenType.punch);
     }
 
     public void SetState(TileState tileState, Vector2Int position)
