@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Brain : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static Brain ins;
+
+    private void Awake()
     {
-        
+        ins = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private SceneLoader m_sceneLoader = null;
+
+
 }

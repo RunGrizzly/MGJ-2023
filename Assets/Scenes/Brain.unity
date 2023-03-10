@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -201,6 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 781916001}
   - component: {fileID: 781916000}
+  - component: {fileID: 781916002}
   m_Layer: 0
   m_Name: Brain
   m_TagString: Untagged
@@ -220,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57189c0ddaffda749a5d37db107708a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_sceneLoader: {fileID: 781916002}
 --- !u!4 &781916001
 Transform:
   m_ObjectHideFlags: 0
@@ -235,6 +237,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &781916002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781915999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9b1d1f03bad0d6498664fcf9766f2c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &890750336
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,23 +298,35 @@ MonoBehaviour:
   _sceneSetupMode: 0
   _sceneSetup:
   - scene:
+      editorAssetGUID: 7fd13de94655a8c4b97ebf96583c2742
+      name: MainMenu
+      _path: Assets/Scenes/MainMenu.unity
+    loadInEditor: 1
+    loadMethod: 3
+  - scene:
       editorAssetGUID: b4c889118dd4424479d4706fc996e802
       name: Overworld
       _path: Assets/Scenes/Overworld.unity
-    loadInEditor: 1
-    loadMethod: 1
+    loadInEditor: 0
+    loadMethod: 3
   - scene:
       editorAssetGUID: 395d942f234ba6d49991fac0ba423fc5
       name: Lights
       _path: Assets/Scenes/Lights.unity
-    loadInEditor: 1
-    loadMethod: 1
+    loadInEditor: 0
+    loadMethod: 3
   - scene:
       editorAssetGUID: b731753d08977304b8e6c106e0a32367
       name: UI
       _path: Assets/Scenes/UI.unity
-    loadInEditor: 1
-    loadMethod: 1
+    loadInEditor: 0
+    loadMethod: 3
+  - scene:
+      editorAssetGUID: dbaa0dc4f95b8454c833fa0d5744ecfa
+      name: Camera
+      _path: Assets/Scenes/Camera.unity
+    loadInEditor: 0
+    loadMethod: 3
   _isMainScene: 0
   _version: 1
   _thisScenePath: Assets/Scenes/Brain.unity

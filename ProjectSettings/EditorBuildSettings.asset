@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Brain.unity
     guid: 7d3b8f5707311a148b9462fa07191984
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 7fd13de94655a8c4b97ebf96583c2742
+  - enabled: 1
     path: Assets/Scenes/Overworld.unity
     guid: b4c889118dd4424479d4706fc996e802
   - enabled: 1
@@ -18,9 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/UI.unity
     guid: b731753d08977304b8e6c106e0a32367
   - enabled: 1
-    path: Assets/Scenes/Test.unity
-    guid: 2f86c3be064bae4438481172f94e3423
-  - enabled: 1
-    path: Assets/Scenes/MainScene.unity
-    guid: c07168c1cc5dbd749bc67c17d297231f
+    path: Assets/Scenes/Camera.unity
+    guid: dbaa0dc4f95b8454c833fa0d5744ecfa
   m_configObjects: {}
