@@ -299,7 +299,7 @@ MonoBehaviour:
       editorAssetGUID: b731753d08977304b8e6c106e0a32367
       name: UI
       _path: Assets/Scenes/UI.unity
-    loadInEditor: 1
+    loadInEditor: 0
     loadMethod: 1
   - scene:
       editorAssetGUID: 7212354b96a20304eb041a3d0ffd1b53
