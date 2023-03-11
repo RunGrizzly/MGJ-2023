@@ -130,27 +130,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
-        type: 3}
-      propertyPath: TilePrefab
-      value: 
-      objectReference: {fileID: 4711063211716040980, guid: a595a423688d6fe4faa6ebdb58865e3c,
-        type: 3}
-    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
-        type: 3}
-      propertyPath: m_gridDims.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
-        type: 3}
-      propertyPath: m_gridDims.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
-        type: 3}
-      propertyPath: m_generationSpeed
-      value: 0.05
-      objectReference: {fileID: 0}
     - target: {fileID: 814845323747982080, guid: 89cf837f981931541858d1c003f8f2a1,
         type: 3}
       propertyPath: m_RootOrder
