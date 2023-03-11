@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731749, g: 0.13414757, b: 0.1210787, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -250,14 +250,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b1d1f03bad0d6498664fcf9766f2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!81 &781916003
-AudioListener:
+--- !u!114 &781916003
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 781915999}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53c9e3b3400f9ce40aadcdcd9733b9d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _connection: {fileID: 11400000, guid: a8698fe4b5ae1264fa9ea24937fc6619, type: 2}
 --- !u!1 &890750336
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,12 +312,6 @@ MonoBehaviour:
   _sceneSetupMode: 0
   _sceneSetup:
   - scene:
-      editorAssetGUID: 7fd13de94655a8c4b97ebf96583c2742
-      name: MainMenu
-      _path: Assets/Scenes/MainMenu.unity
-    loadInEditor: 0
-    loadMethod: 3
-  - scene:
       editorAssetGUID: 395d942f234ba6d49991fac0ba423fc5
       name: Lights
       _path: Assets/Scenes/Lights.unity
@@ -325,11 +324,23 @@ MonoBehaviour:
     loadInEditor: 0
     loadMethod: 3
   - scene:
+      editorAssetGUID: 7fd13de94655a8c4b97ebf96583c2742
+      name: MainMenu
+      _path: Assets/Scenes/MainMenu.unity
+    loadInEditor: 0
+    loadMethod: 3
+  - scene:
       editorAssetGUID: dbaa0dc4f95b8454c833fa0d5744ecfa
       name: Camera
       _path: Assets/Scenes/Camera.unity
     loadInEditor: 0
     loadMethod: 3
+  - scene:
+      editorAssetGUID: 9bccf9ae8ef9aeb48a2566407e3f8249
+      name: KYLE
+      _path: Assets/Scenes/KYLE.unity
+    loadInEditor: 1
+    loadMethod: 1
   - scene:
       editorAssetGUID: c07168c1cc5dbd749bc67c17d297231f
       name: BattleScene

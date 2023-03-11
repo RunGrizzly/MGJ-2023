@@ -45,5 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_gridDims: {x: 5, y: 5}
-  m_tileHolder: {fileID: 7030794406023439344, guid: 2c278ee7127ffac40b0bbbc9edc56734,
-    type: 3}
+  TileSet:
+    m_keys:
+    - Empty
+    - Start
+    - Straight
+    m_values:
+    - {fileID: 6034350871117240496, guid: ef419a0edd09c0f44a2b5526a08d14f2, type: 3}
+    - {fileID: 7716244139365117538, guid: df5b6e76074e4df46a9c519bb043598c, type: 3}
+    - {fileID: 2845173205551354564, guid: 42f584d2e94da554090c1ee9478cdd58, type: 3}
+  m_generationSpeed: 0.05
