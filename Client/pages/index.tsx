@@ -42,9 +42,13 @@ const InGame = ({ client }: Props) => {
       <h2>LETS GO LETS GO</h2>
       {match.tileRequests > 0 && (
         <div>
-          <button onClick={() => match.onSelectTrack(1)}>LEFT</button>
-          <button onClick={() => match.onSelectTrack(0)}>STRAIGHT</button>
-          <button onClick={() => match.onSelectTrack(2)}>RIGHT</button>
+          <button onClick={() => match.onSelectTrack("LeftTurn")}>LEFT</button>
+          <button onClick={() => match.onSelectTrack("Straight")}>
+            STRAIGHT
+          </button>
+          <button onClick={() => match.onSelectTrack("RightTurn")}>
+            RIGHT
+          </button>
         </div>
       )}
     </div>

@@ -118,19 +118,22 @@ public class NakamaManager : MonoBehaviour
         _connection.BattleConnection.MatchId = match.Id;
         _connection.BattleConnection.Users = matched.Users.Select(u => u.Presence).ToList();
         _stateManager = new GameStateManager(_connection);
-        StartCoroutine(Send());
+        _connection.BattleConnection.GameStateManager = _stateManager;
+
+        //StartCoroutine(Send());
+        Brain.ins.EventManager.battleReady.Invoke(matched.Users.Where(user => user.Presence.UserId != matched.Self.Presence.UserId).Select(user => user.Presence.UserId).ToList());
     }
 
     private GameStateManager _stateManager;
 
-    IEnumerator Send()
-    {
-        yield return new WaitForSeconds(2);
-        var task1 = _stateManager.SendMatchStateMessage(MatchMessageType.RequestTrack, new MatchMessageStartGame());
-        yield return new WaitUntil(() => task1.IsCompleted);
-        var task2 = _stateManager.SendMatchStateMessage(MatchMessageType.RequestTrack, new MatchMessageRequestTrack());
-        yield return new WaitUntil(() => task2.IsCompleted);
-    }
+    //IEnumerator Send()
+    //{
+    //yield return new WaitForSeconds(2);
+    //var task1 = _stateManager.SendMatchStateMessage(MatchMessageType.RequestTrack, new MatchMessageStartGame());
+    //yield return new WaitUntil(() => task1.IsCompleted);
+    //var task2 = _stateManager.SendMatchStateMessage(MatchMessageType.RequestTrack, new MatchMessageRequestTrack());
+    //yield return new WaitUntil(() => task2.IsCompleted);
+    //}
 
 
 

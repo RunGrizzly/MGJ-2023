@@ -1,12 +1,13 @@
 import { MatchMessage } from "../messages/matchMessage";
 import { MatchMessageType } from "./matchMessage";
 
+export type TrackType = "LeftTurn" | "RightTurn" | "Straight";
 export type SelectTrackMessage = MatchMessage<{
-  trackId: number;
+  trackId: TrackType;
 }>;
 
 export const createSelectTrackMessage = (
-  trackId: number
+  trackId: TrackType
 ): SelectTrackMessage => ({
   type: MatchMessageType.TrackSelected,
   data: { trackId },

@@ -18,9 +18,6 @@ public class TrackGrid : MonoBehaviour
 
     public List<Train> Trains = new List<Train>();
 
-
-
-
     public Limits limits = new Limits();
 
     public void Start()
@@ -45,39 +42,39 @@ public class TrackGrid : MonoBehaviour
             {
                 var tileType = "Empty";
                 var orientation = Direction.North;
-                if (x == 0 && y == 0)
-                {
-                    tileType = "Start";
-                    orientation = Direction.East;
-
-                }
-                else if (x == 1 && y == 0)
-                {
-                    tileType = "Straight";
-                    orientation = Direction.East;
-                }
-                else if (x == 2 && y == 0)
-                {
-                    tileType = "LeftTurn";
-                    orientation = Direction.East;
-                }
-                else if (x == 2 && y < 3)
-                {
-                    tileType = "Straight";
-                }
-                else if (x == 2 && y == 3)
-                {
-                    tileType = "LeftTurn";
-                }
-                else if (x == 1 && y == 3)
-                {
-                    tileType = "RightTurn";
-                    orientation = Direction.West;
-                }
-                else if (x == 1 && y is > 3 and < 6)
-                {
-                    tileType = "Straight";
-                }
+                // if (x == 0 && y == 0)
+                // {
+                //     tileType = "Start";
+                //     orientation = Direction.East;
+                //
+                // }
+                // else if (x == 1 && y == 0)
+                // {
+                //     tileType = "Straight";
+                //     orientation = Direction.East;
+                // }
+                // else if (x == 2 && y == 0)
+                // {
+                //     tileType = "LeftTurn";
+                //     orientation = Direction.East;
+                // }
+                // else if (x == 2 && y < 3)
+                // {
+                //     tileType = "Straight";
+                // }
+                // else if (x == 2 && y == 3)
+                // {
+                //     tileType = "LeftTurn";
+                // }
+                // else if (x == 1 && y == 3)
+                // {
+                //     tileType = "RightTurn";
+                //     orientation = Direction.West;
+                // }
+                // else if (x == 1 && y is > 3 and < 6)
+                // {
+                //     tileType = "Straight";
+                // }
 
                 TrackTile tile = Instantiate(GetTile(tileType), new Vector3(x, 0, y), Quaternion.identity).GetComponent<TrackTile>();
                 tile.transform.SetParent(m_tileHolder, true);
@@ -102,22 +99,34 @@ public class TrackGrid : MonoBehaviour
         //The grid has finished generating - lets the event manager know
         Brain.ins.EventManager.gridCompleted.Invoke(this);
 
-        //Test spawn multiple trains
-        Trains.Add(SpawnTrain());
-        yield return new WaitForSeconds(3);
-        Trains.Add(SpawnTrain());
-        yield return new WaitForSeconds(3);
-        Trains.Add(SpawnTrain());
-        yield return new WaitForSeconds(3);
+        // //Test spawn multiple trains
+        //Trains.Add(SpawnTrain());
+        // yield return new WaitForSeconds(3);
+        // Trains.Add(SpawnTrain());
+        // yield return new WaitForSeconds(3);
+        // Trains.Add(SpawnTrain());
+        // yield return new WaitForSeconds(3);
 
 
     }
 
-    private Train SpawnTrain()
+    public Train SpawnTrain()
     {
         var firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
-        var train = Instantiate(Train, new Vector3(0, 0.6f, 0), Quaternion.identity).GetComponent<Train>();
-        train.transform.SetParent(transform, true);
+        var spawnLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(0, 0));
+
+        var startBlock = Instantiate(GetTile("Start"), Vector3.zero, Quaternion.identity);
+        startBlock.GetComponent<TrackTile>().SetState(new Vector2Int(0, 0), Direction.East);
+        var straightBlock = Instantiate(GetTile("Straight"), firstLocation.transform.position, Quaternion.identity);
+        straightBlock.GetComponent<TrackTile>().SetState(new Vector2Int(0, 0), Direction.East);
+
+        m_gridTiles.Remove(firstLocation);
+        m_gridTiles.Remove(straightBlock);
+        m_gridTiles.Add(startBlock);
+        m_gridTiles.Add(straightBlock);
+
+        var train = Instantiate(Train, new Vector3(0, 0.8f, 0), Quaternion.identity).GetComponent<Train>();
+        train.transform.SetParent(transform);
         train.SetDestination(firstLocation.transform.position);
 
         ColorSet newColorSet = m_availableColorSets[UnityEngine.Random.Range(0, m_availableColorSets.Count)];
@@ -128,6 +137,18 @@ public class TrackGrid : MonoBehaviour
         return train;
     }
 
+    public void SpawnTile(Lookahead lookahead, string type)
+    {
+        var currentTile = m_gridTiles.Find(tile => tile.GetComponent<TrackTile>().m_position.Equals(lookahead.postition));
+        var tile = GetTile(type);
+
+        var newTile = Instantiate(tile, currentTile.transform.position, Quaternion.identity);
+        m_gridTiles.Remove(currentTile);
+        m_gridTiles.Add(newTile);
+        newTile.GetComponent<TrackTile>().SetState(new Vector2Int((int)currentTile.transform.position.x, (int)currentTile.transform.position.z), lookahead.direction);
+
+
+    }
 
     private void ClearTiles()
     {
@@ -188,6 +209,7 @@ public class TrackGrid : MonoBehaviour
         return (new Vector3(gridTile.transform.position.x, 0.8f, gridTile.transform.position.z), trainDirection);
     }
 
+    //TODO: Fix when train goes in to reversed turn
     public Direction SelectNextDirection(Vector3 position, Direction currentDirection)
     {
         var tile = m_gridTiles.Find(go =>

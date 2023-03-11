@@ -14,4 +14,6 @@ public class BattleConnection
     {
         Matched = matched;
     }
+
+    public GameStateManager GameStateManager { get; internal set; }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,28 +16,28 @@ public class Train : MonoBehaviour
 
     public float speed = 1.0f;
 
-    private float m_startTime;
+    public Lookahead LookAheadTile = new Lookahead();
 
-    private float m_journeyLength;
+    private TrackGrid _trackGrid;
+    public string UserId;
 
-    private float timeElapsed;
-
-
-
-
-    public void SetDestination(Vector3 end)
+    private void Start()
     {
-        m_direction = Direction.East;
+        _trackGrid = GameObject.Find("TrackGrid").GetComponent<TrackGrid>();
+    }
+
+    public void SetDestination(Vector3 end, Direction direction = Direction.East)
+    {
+        m_direction = direction;
         endMarker = end;
 
         var trueEnd = new Vector3(end.x, transform.position.y, end.z);
-        //endMarker.position = new Vector3(position.x, 0.8f, position.z);
         endMarker = trueEnd;
         startMarker = transform;
 
-        m_startTime = Time.time;
+        SetRotation(direction);
 
-        m_journeyLength = Vector3.Distance(transform.position, endMarker);
+        SetLookahead(end, direction);
     }
 
     // Update is called once per frame
@@ -72,30 +73,16 @@ public class Train : MonoBehaviour
                 var nextDirection = ChooseNextDirection();
                 endMarker = nextDirection.Item1;
                 m_direction = nextDirection.Item2;
+                SetRotation(m_direction);
+                Brain.ins.EventManager.trainDestinationUpdate?.Invoke(this);
             }
         }
     }
 
     private (Vector3, Direction) ChooseNextDirection()
     {
-        return GameObject.Find("TrackGrid").GetComponent<TrackGrid>().GetNextTile(transform.position, m_direction);
-        // var position = transform.position;
-        //
-        // switch (m_direction)
-        // {
-        //     case Direction.East:
-        //         return new Vector3(position.x + 1, position.y, position.z);
-        //     case Direction.North:
-        //         return new Vector3(position.x, position.y, position.z + 1);
-        //     case Direction.West:
-        //         return new Vector3(position.x - 1, position.y, position.z);
-        //     case Direction.South:
-        //         return new Vector3(position.x, position.y, position.z - 1);
-        // }
-        //
-        // return Vector3.forward;
+        return _trackGrid.GetNextTile(transform.position, m_direction);
     }
-
 
     public void Decorate(ColorSet newColorSet)
     {
@@ -109,6 +96,33 @@ public class Train : MonoBehaviour
         newFaceMaterial.SetTexture("_Face", newColorSet.Face);
         m_faceRenderer.material = newFaceMaterial;
     }
+
+    private void SetRotation(Direction direction)
+    {
+        switch (m_direction)
+        {
+            case Direction.East:
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 90.0f, transform.eulerAngles.z);
+                break;
+            case Direction.North:
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 0.0f, transform.eulerAngles.z);
+                break;
+            case Direction.West:
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 270.0f, transform.eulerAngles.z);
+                break;
+            case Direction.South:
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180.0f, transform.eulerAngles.z);
+                break;
+        }
+
+    }
+
+    public void SetLookahead(Vector3 position, Direction direction)
+    {
+        var lookaheadTile = GameObject.Find("TrackGrid").GetComponent<TrackGrid>().GetNextTile(position, m_direction);
+        LookAheadTile = new Lookahead(new Vector2Int((int)lookaheadTile.Item1.x, (int)lookaheadTile.Item1.z),
+            direction);
+    }
 }
 
 public enum Direction
@@ -117,4 +131,15 @@ public enum Direction
     East,
     South,
     West
+}
+
+public struct Lookahead
+{
+    public Lookahead(Vector2Int postition, Direction direction)
+    {
+        this.postition = postition;
+        this.direction = direction;
+    }
+    public Vector2Int postition;
+    public Direction direction;
 }

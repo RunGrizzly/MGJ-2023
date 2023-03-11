@@ -23,13 +23,7 @@ public class GameStateManager
         _connection.Socket.ReceivedMatchState += ReceiveMatchStateMessage;
     }
 
-    public void ReceiveMatchStateHandle(string messageJSON)
-    {
-        MatchMessageTrackSelected matchMessageTrackSelected = MatchMessageTrackSelected.Parse(messageJSON);
-        OnTrackSelected?.Invoke(matchMessageTrackSelected);
-    }
-
-    public async Task SendMatchStateMessage<T>(MatchMessageType opCode, T message) where T : MatchMessage<T>
+    public async Task SendMatchStateMessage<T>(MatchMessageType opCode, T message, IEnumerable<IUserPresence> presences) where T : MatchMessage<T>
     {
         try
         {
@@ -38,7 +32,7 @@ public class GameStateManager
 
             //Sending match state json along with opCode needed for unpacking message to server.
             //Then server sends it to other players
-            await _connection.Socket.SendMatchStateAsync(_connection.BattleConnection.MatchId, (long)opCode, json);
+            await _connection.Socket.SendMatchStateAsync(_connection.BattleConnection.MatchId, (long)opCode, json, presences);
         }
         catch (Exception e)
         {
@@ -67,6 +61,7 @@ public class GameStateManager
 
     private void ReceiveMatchStateMessage(IMatchState matchState)
     {
+        var userSessionId = matchState.UserPresence.SessionId;
         string messageJson = System.Text.Encoding.UTF8.GetString(matchState.State);
 
         if (string.IsNullOrEmpty(messageJson))
@@ -74,6 +69,16 @@ public class GameStateManager
             return;
         }
 
-        ReceiveMatchStateHandle(messageJson);
+        switch ((MatchMessageType)matchState.OpCode)
+        {
+            case MatchMessageType.TrackSelected:
+                var message = MatchMessageTrackSelected.Parse(messageJson);
+                message = new MatchMessageTrackSelected(message.trackId, matchState.UserPresence.UserId);
+                OnTrackSelected?.Invoke(message);
+                break;
+            default:
+                break;
+        }
+
     }
 }
