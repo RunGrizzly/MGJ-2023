@@ -1,13 +1,17 @@
+using Nakama;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Nakama.TinyJson;
 
 public class MatchMessageTrackSelected : MatchMessage<MatchMessageTrackSelected>
 {
-    public readonly int TrackId;
+    public readonly string trackId;
+    public readonly string userId;
 
-    public MatchMessageTrackSelected(int trackId)
+    public MatchMessageTrackSelected(string trackId, string userId)
     {
-        TrackId = trackId;
+        this.trackId = trackId;
+        this.userId = userId;
     }
 }

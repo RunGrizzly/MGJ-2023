@@ -33,6 +33,7 @@ ul {
 }
 
 button {
-  padding: 0.5rem 1rem;
+  padding: 0.5em 1em;
   font-weight: bold;
+  font-size: 3em;
 }

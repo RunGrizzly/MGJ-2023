@@ -18,7 +18,7 @@ public class TrackGrid : MonoBehaviour
     [SerializeField] private Transform m_tileHolder;
 
     public List<Train> Trains = new List<Train>();
-    
+
     public Limits limits = new Limits();
 
     public void Start()
@@ -99,7 +99,7 @@ public class TrackGrid : MonoBehaviour
         Brain.ins.EventManager.gridCompleted.Invoke(this);
 
         // //Test spawn multiple trains
-        Trains.Add(SpawnTrain());
+        //Trains.Add(SpawnTrain());
         // yield return new WaitForSeconds(3);
         // Trains.Add(SpawnTrain());
         // yield return new WaitForSeconds(3);
@@ -109,21 +109,21 @@ public class TrackGrid : MonoBehaviour
 
     }
 
-    private Train SpawnTrain()
+    public Train SpawnTrain()
     {
         var firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
         var spawnLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(0, 0));
-        
+
         var startBlock = Instantiate(GetTile("Start"), Vector3.zero, Quaternion.identity);
-        startBlock.GetComponent<TrackTile>().SetState(new Vector2Int(0,0), Direction.East);
+        startBlock.GetComponent<TrackTile>().SetState(new Vector2Int(0, 0), Direction.East);
         var straightBlock = Instantiate(GetTile("Straight"), firstLocation.transform.position, Quaternion.identity);
-        straightBlock.GetComponent<TrackTile>().SetState(new Vector2Int(0,0), Direction.East);
+        straightBlock.GetComponent<TrackTile>().SetState(new Vector2Int(0, 0), Direction.East);
 
         m_gridTiles.Remove(firstLocation);
         m_gridTiles.Remove(straightBlock);
         m_gridTiles.Add(startBlock);
         m_gridTiles.Add(straightBlock);
-        
+
         var train = Instantiate(Train, new Vector3(0, 0.8f, 0), Quaternion.identity).GetComponent<Train>();
         train.transform.SetParent(transform);
         train.SetDestination(firstLocation.transform.position);
@@ -145,8 +145,10 @@ public class TrackGrid : MonoBehaviour
         m_gridTiles.Remove(currentTile);
         m_gridTiles.Add(newTile);
         newTile.GetComponent<TrackTile>().SetState(new Vector2Int((int)currentTile.transform.position.x, (int)currentTile.transform.position.z), lookahead.direction);
+
+
     }
-    
+
     private void ClearTiles()
     {
         foreach (var mGridTile in m_gridTiles)

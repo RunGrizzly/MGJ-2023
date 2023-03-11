@@ -18,6 +18,7 @@ public class Train : MonoBehaviour
     public Lookahead LookAheadTile = new Lookahead();
 
     private TrackGrid _trackGrid;
+    public string UserId;
 
     private void Start()
     {
@@ -32,7 +33,7 @@ public class Train : MonoBehaviour
         var trueEnd = new Vector3(end.x, transform.position.y, end.z);
         endMarker = trueEnd;
         startMarker = transform;
-        
+
         SetRotation(direction);
 
         SetLookahead(end, direction);
@@ -72,6 +73,7 @@ public class Train : MonoBehaviour
                 endMarker = nextDirection.Item1;
                 m_direction = nextDirection.Item2;
                 SetRotation(m_direction);
+                Brain.ins.EventManager.trainDestinationUpdate?.Invoke(this);
             }
         }
     }
@@ -91,7 +93,7 @@ public class Train : MonoBehaviour
 
         m_renderer.material = newMaterial;
     }
-    
+
     private void SetRotation(Direction direction)
     {
         switch (m_direction)
@@ -109,12 +111,12 @@ public class Train : MonoBehaviour
                 transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180.0f, transform.eulerAngles.z);
                 break;
         }
-            
+
     }
 
-    private void SetLookahead(Vector3 position, Direction direction)
+    public void SetLookahead(Vector3 position, Direction direction)
     {
-        var lookaheadTile = _trackGrid.GetNextTile(position, m_direction);
+        var lookaheadTile = GameObject.Find("TrackGrid").GetComponent<TrackGrid>().GetNextTile(position, m_direction);
         LookAheadTile = new Lookahead(new Vector2Int((int)lookaheadTile.Item1.x, (int)lookaheadTile.Item1.z),
             direction);
     }

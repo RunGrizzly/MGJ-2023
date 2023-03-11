@@ -1,7 +1,10 @@
 import { Match, MatchData, Presence, Socket } from "@heroiclabs/nakama-js";
 import { useState } from "react";
 import { MatchMessage, MatchMessageType } from "../messages/matchMessage";
-import { createSelectTrackMessage } from "../messages/selectTrackMessage";
+import {
+  createSelectTrackMessage,
+  TrackType,
+} from "../messages/selectTrackMessage";
 
 export const useMatch = (match: Match, socket: Socket, host: Presence) => {
   const [isAlive, setIsAlive] = useState(true);
@@ -32,7 +35,7 @@ export const useMatch = (match: Match, socket: Socket, host: Presence) => {
     setTileRequests((amount) => amount + 1);
   }
 
-  async function onSelectTrack(trackId: number) {
+  async function onSelectTrack(trackId: TrackType) {
     const message = createSelectTrackMessage(trackId);
     setTileRequests((count) => count - 1);
     await sendMatchState(message);
@@ -42,9 +45,12 @@ export const useMatch = (match: Match, socket: Socket, host: Presence) => {
     console.log(
       `Sending match state ${f.type} ${JSON.stringify(f.data)} to host ${host}`
     );
-    await socket.sendMatchState(match.match_id, f.type, JSON.stringify(f), [
-      host,
-    ]);
+    await socket.sendMatchState(
+      match.match_id,
+      f.type,
+      JSON.stringify(f.data),
+      [host]
+    );
   }
 
   return {
