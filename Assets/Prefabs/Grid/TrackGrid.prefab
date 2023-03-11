@@ -59,4 +59,4 @@ MonoBehaviour:
     - {fileID: 2715091823660752906, guid: ddd458571f1e45f4ebca3ed75a9f77d9, type: 3}
     - {fileID: 2418425240695382919, guid: 66cc91e32de3c4140ba913ba49416c47, type: 3}
   m_generationSpeed: 0.025
-  Train: {fileID: 7035665893271451779, guid: 3ad4683d34a860b4495d8e9288ac5436, type: 3}
+  Train: {fileID: 7406964780268013954, guid: 76ab54bb0a00fac48bf879740f2bbcda, type: 3}

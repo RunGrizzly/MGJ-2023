@@ -8,7 +8,7 @@ using UnityEngine;
 public class TrackGrid : MonoBehaviour
 {
     [SerializeField] private Vector2Int m_gridDims = Vector2Int.zero;
-    List<GameObject> m_gridTiles =  new List<GameObject>();
+    List<GameObject> m_gridTiles = new List<GameObject>();
     [SerializeField] private SerializableDictionary<string, GameObject> TileSet;
     [SerializeField] private float m_generationSpeed = 0.2f;
     [SerializeField] private GameObject Train;
@@ -40,21 +40,26 @@ public class TrackGrid : MonoBehaviour
                 {
                     tileType = "Straight";
                     orientation = Direction.East;
-                } else if (x == 2 && y == 0)
+                }
+                else if (x == 2 && y == 0)
                 {
                     tileType = "LeftTurn";
                     orientation = Direction.East;
-                } else if (x == 2 && y < 3)
+                }
+                else if (x == 2 && y < 3)
                 {
                     tileType = "Straight";
-                } else if (x == 2 && y == 3)
+                }
+                else if (x == 2 && y == 3)
                 {
                     tileType = "LeftTurn";
-                } else if (x == 1 && y == 3)
+                }
+                else if (x == 1 && y == 3)
                 {
                     tileType = "RightTurn";
                     orientation = Direction.West;
-                } else if (x == 1 && y is > 3 and < 6)
+                }
+                else if (x == 1 && y is > 3 and < 6)
                 {
                     tileType = "Straight";
                 }
@@ -64,17 +69,17 @@ public class TrackGrid : MonoBehaviour
                 tile.SetState(new Vector2Int(x, y), orientation);
 
                 m_gridTiles.Add(tile.gameObject);
-                
+
 
                 yield return new WaitForSeconds(m_generationSpeed);
             }
         }
-        
-        // var firstLocation = m_gridTiles.Find(go =>
-        //     go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
-        // var tren = Instantiate(Train, new Vector3(0, 0.8f, 0),
-        //     Quaternion.identity).GetComponent<Train>();
-        // tren.SetDestination(firstLocation.transform.position);
+
+        var firstLocation = m_gridTiles.Find(go =>
+            go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
+        var tren = Instantiate(Train, new Vector3(0, 0.8f, 0),
+            Quaternion.identity).GetComponent<Train>();
+        tren.SetDestination(firstLocation.transform.position);
     }
 
     private void ClearTiles()
@@ -83,7 +88,7 @@ public class TrackGrid : MonoBehaviour
         {
             Destroy(mGridTile);
         }
-        
+
         m_gridTiles.RemoveAll(t => t == null);
     }
 
@@ -108,7 +113,7 @@ public class TrackGrid : MonoBehaviour
 
         return tile;
     }
-    
+
     public (Vector3, Direction) GetNextTile(Vector3 position, Direction currentDirection)
     {
         var trainDirection = SelectNextDirection(position, currentDirection);
@@ -132,8 +137,8 @@ public class TrackGrid : MonoBehaviour
                     x.transform.position.x == position.x - 1 && x.transform.position.z == position.z);
                 break;
         }
-    
-        return  (new Vector3(gridTile.transform.position.x, 0.8f, gridTile.transform.position.z), trainDirection);
+
+        return (new Vector3(gridTile.transform.position.x, 0.8f, gridTile.transform.position.z), trainDirection);
     }
 
     public Direction SelectNextDirection(Vector3 position, Direction currentDirection)
@@ -154,7 +159,8 @@ public class TrackGrid : MonoBehaviour
                 case Direction.West:
                     return Direction.South;
             }
-        } else if (tile.name.Contains("Right"))
+        }
+        else if (tile.name.Contains("Right"))
         {
             switch (currentDirection)
             {
@@ -168,7 +174,7 @@ public class TrackGrid : MonoBehaviour
                     return Direction.North;
             }
         }
-        
+
         return currentDirection;
     }
 }

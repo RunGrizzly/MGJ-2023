@@ -3,11 +3,13 @@ using UnityEngine.Events;
 
 public class BattleStartedEvent : UnityEvent { }
 public class BattleEndedEvent : UnityEvent { }
+public class GridCompletedEvent : UnityEvent<TrackGrid> { }
 
 public class EventManager : MonoBehaviour
 {
-    public UnityEvent battleStarted;
-    public UnityEvent battleEnded;
+    public BattleStartedEvent battleStarted;
+    public BattleEndedEvent battleEnded;
+    public GridCompletedEvent gridCompleted;
 
     private void Awake()
     {
@@ -20,5 +22,11 @@ public class EventManager : MonoBehaviour
         {
             battleEnded = new BattleEndedEvent();
         }
+
+        if (gridCompleted == null)
+        {
+            gridCompleted = new GridCompletedEvent();
+        }
+
     }
 }
