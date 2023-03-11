@@ -47,8 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_position: {x: -1, y: -1}
   m_isReplaceable: 0
-  m_mesh: {r: 0, g: 0, b: 0, a: 0}
-  orientation: 1
+  m_orientation: 0
 --- !u!1 &4842097028167846998
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +88,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4842097028167846998}
-  m_Mesh: {fileID: 5302568919011541938, guid: ed6408dd017bfdb48ad29167f9d90972, type: 3}
+  m_Mesh: {fileID: -6913430803665345586, guid: ed6408dd017bfdb48ad29167f9d90972, type: 3}
 --- !u!23 &6612982896322920983
 MeshRenderer:
   m_ObjectHideFlags: 0
