@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Nakama;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "GameConnection", menuName = "TRAIN/GameConnection")]
 public class GameConnection : ScriptableObject
@@ -13,6 +14,7 @@ public class GameConnection : ScriptableObject
     public ISocket Socket => _socket;
     public BattleConnection BattleConnection { get; set; }
     public IParty Party { get; set; }
+    public List<IUserPresence> PartyMembers { get; set; }
 
     public void Init(IClient client, ISocket socket, IApiAccount account, ISession session)
     {

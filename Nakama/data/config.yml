@@ -1,0 +1,7 @@
+
+logger:
+  level: "debug"
+
+matchmaker:
+  max_tickets: 1
+  interval_sec: 1

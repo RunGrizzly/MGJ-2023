@@ -88,38 +88,26 @@ public class NakamaManager : MonoBehaviour
 
     private async void OnSocketConnected()
     {
-        var party = await _connection.Socket.CreatePartyAsync(true, GameConstants.MaxPlayerCount + 1);
-        _connection.Party = party;
-        _connection.Socket.ReceivedPartyJoinRequest += OnReceivedPartyJoinRequest;
-
-    }
-
-    private async void OnReceivedPartyJoinRequest(IPartyJoinRequest request)
-    {
-        foreach (var presence in request.Presences)
-        {
-            await _connection.Socket.AcceptPartyMemberAsync(request.PartyId, presence);
-            _connection.Party.Presences.Append(presence);
-        }
-
-        if (_connection.Party.Presences.Count() > 2)
-        {
-            await StartBattle();
-        }
+        await StartBattle();
     }
 
     private async Task StartBattle()
     {
         _connection.Socket.ReceivedMatchmakerMatched += ReceivedMatchmakerMatched;
-
-        await _connection.Socket.AddMatchmakerPartyAsync(_connection.Party.Id, "*", 3, GameConstants.MaxPlayerCount + 1);
+        _connection.Socket.ReceivedError += error =>
+        {
+            Debug.LogError("Received error on socket " + error.Message);
+        };
+        var ticket = await _connection.Socket.AddMatchmakerAsync("*", 2, 3, new Dictionary<string, string> { { "type", "host" } });
     }
 
 
     private async void ReceivedMatchmakerMatched(IMatchmakerMatched matched)
     {
-        _connection.BattleConnection.Matched = matched;
+        Debug.Log("We have been match made");
+        _connection.BattleConnection = new BattleConnection(matched);
         var match = await _connection.Socket.JoinMatchAsync(matched);
+        Debug.Log("We have joined match");
         _connection.BattleConnection.MatchId = match.Id;
         _connection.BattleConnection.PlayerIds = match.Presences.Select(p => p.UserId).ToList();
 
@@ -155,7 +143,7 @@ public class NakamaManager : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.LogWarning("Error connecting socket: " + e.Message);
+            Debug.LogError("Error connecting socket: " + e.Message);
         }
     }
 
