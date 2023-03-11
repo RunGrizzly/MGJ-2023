@@ -5,7 +5,8 @@ using UnityEngine;
 public class Train : MonoBehaviour
 {
     [SerializeField] private Material m_material;
-    [SerializeField] private Renderer m_renderer;
+    [SerializeField] private Renderer m_bodyRenderer;
+    [SerializeField] private Renderer m_faceRenderer;
     public Direction m_direction = Direction.East;
 
     public Transform startMarker;
@@ -98,13 +99,15 @@ public class Train : MonoBehaviour
 
     public void Decorate(ColorSet newColorSet)
     {
-        Material newMaterial = new Material(m_material);
+        Material newBodyMaterial = new Material(m_bodyRenderer.sharedMaterial);
+        newBodyMaterial.SetColor("_MainColor", newColorSet.MainColor);
+        newBodyMaterial.SetColor("_SecColor", newColorSet.SecColor);
+        newBodyMaterial.SetColor("_TertiaryColor", newColorSet.TertiaryColor);
+        m_bodyRenderer.material = newBodyMaterial;
 
-        newMaterial.SetColor("_MainColor", newColorSet.MainColor);
-        newMaterial.SetColor("_SecColor", newColorSet.SecColor);
-        newMaterial.SetColor("_TertiaryColor", newColorSet.TertiaryColor);
-
-        m_renderer.material = newMaterial;
+        Material newFaceMaterial = new Material(m_faceRenderer.sharedMaterial);
+        newFaceMaterial.SetTexture("_Face", newColorSet.Face);
+        m_faceRenderer.material = newFaceMaterial;
     }
 }
 

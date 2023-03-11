@@ -9,8 +9,7 @@ public class TrackGrid : MonoBehaviour
 {
     [SerializeField] private TrainColorSet m_trainColorSet = null;
     private List<ColorSet> m_availableColorSets = null;
-
-    [SerializeField] private Vector2Int m_gridDims = Vector2Int.zero;
+    [field: SerializeField] public Vector2Int GridDims = Vector2Int.zero;
     List<GameObject> m_gridTiles = new List<GameObject>();
     [SerializeField] private SerializableDictionary<string, GameObject> TileSet;
     [SerializeField] private float m_generationSpeed = 0.2f;
@@ -38,9 +37,11 @@ public class TrackGrid : MonoBehaviour
             ClearTiles();
         }
 
-        for (int x = 0; x < m_gridDims.x; x++)
+        Brain.ins.EventManager.gridInitialised.Invoke(this);
+
+        for (int x = 0; x < GridDims.x; x++)
         {
-            for (int y = 0; y < m_gridDims.y; y++)
+            for (int y = 0; y < GridDims.y; y++)
             {
                 var tileType = "Empty";
                 var orientation = Direction.North;
@@ -79,14 +80,14 @@ public class TrackGrid : MonoBehaviour
                 }
 
                 TrackTile tile = Instantiate(GetTile(tileType), new Vector3(x, 0, y), Quaternion.identity).GetComponent<TrackTile>();
-                tile.transform.SetParent(m_tileHolder);
+                tile.transform.SetParent(m_tileHolder, true);
                 tile.SetState(new Vector2Int(x, y), orientation);
 
                 if (x == 0 && y == 0)
                 {
                     limits.BottomLeft = tile.transform;
                 }
-                else if (x == m_gridDims.x - 1 && y == m_gridDims.y - 1)
+                else if (x == GridDims.x - 1 && y == GridDims.y - 1)
                 {
                     limits.TopRight = tile.transform;
                 }
@@ -115,8 +116,8 @@ public class TrackGrid : MonoBehaviour
     private Train SpawnTrain()
     {
         var firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
-        var train = Instantiate(Train, new Vector3(0, 0.8f, 0), Quaternion.identity).GetComponent<Train>();
-        train.transform.SetParent(transform);
+        var train = Instantiate(Train, new Vector3(0, 0.6f, 0), Quaternion.identity).GetComponent<Train>();
+        train.transform.SetParent(transform, true);
         train.SetDestination(firstLocation.transform.position);
 
         ColorSet newColorSet = m_availableColorSets[UnityEngine.Random.Range(0, m_availableColorSets.Count)];
@@ -141,8 +142,8 @@ public class TrackGrid : MonoBehaviour
     //Temporary - will need to decide player spawns based on numberPlayers / patterns or something
     private bool IsCorner(int x, int y)
     {
-        int maxX = m_gridDims.x - 1;
-        int maxY = m_gridDims.y - 1;
+        int maxX = GridDims.x - 1;
+        int maxY = GridDims.y - 1;
 
         if (x == 0 && y == 0 || x == 0 && y == maxY || x == maxX && y == 0 || x == maxX && y == maxY)
         {
@@ -224,7 +225,6 @@ public class TrackGrid : MonoBehaviour
         return currentDirection;
     }
 }
-
 public struct Limits
 {
     public Transform BottomLeft;

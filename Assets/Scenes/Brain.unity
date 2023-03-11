@@ -426,7 +426,7 @@ MonoBehaviour:
       editorAssetGUID: 7fd13de94655a8c4b97ebf96583c2742
       name: MainMenu
       _path: Assets/Scenes/MainMenu.unity
-    loadInEditor: 1
+    loadInEditor: 0
     loadMethod: 3
   - scene:
       editorAssetGUID: 395d942f234ba6d49991fac0ba423fc5
@@ -444,7 +444,7 @@ MonoBehaviour:
       editorAssetGUID: dbaa0dc4f95b8454c833fa0d5744ecfa
       name: Camera
       _path: Assets/Scenes/Camera.unity
-    loadInEditor: 0
+    loadInEditor: 1
     loadMethod: 3
   - scene:
       editorAssetGUID: c07168c1cc5dbd749bc67c17d297231f
@@ -462,7 +462,7 @@ MonoBehaviour:
       editorAssetGUID: 61d4853a00a182b4a879bf5b1977f17f
       name: LoopTest
       _path: Assets/Scenes/LoopTest.unity
-    loadInEditor: 0
+    loadInEditor: 1
     loadMethod: 3
   _isMainScene: 0
   _version: 1
