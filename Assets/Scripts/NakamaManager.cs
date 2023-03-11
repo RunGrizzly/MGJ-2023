@@ -6,6 +6,13 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 
+public enum MatchMessageType
+{
+    StartGame = 1,
+    RequestTrack = 2,
+    TrackSelected = 3,
+}
+
 public class NakamaManager : MonoBehaviour
 {
     [SerializeField]
@@ -109,9 +116,23 @@ public class NakamaManager : MonoBehaviour
         var match = await _connection.Socket.JoinMatchAsync(matched);
         Debug.Log("We have joined match");
         _connection.BattleConnection.MatchId = match.Id;
-        _connection.BattleConnection.PlayerIds = match.Presences.Select(p => p.UserId).ToList();
-
+        _connection.BattleConnection.Users = matched.Users.Select(u => u.Presence).ToList();
+        _stateManager = new GameStateManager(_connection);
+        StartCoroutine(Send());
     }
+
+    private GameStateManager _stateManager;
+
+    IEnumerator Send()
+    {
+        yield return new WaitForSeconds(2);
+        var task1 = _stateManager.SendMatchStateMessage(MatchMessageType.RequestTrack, new MatchMessageStartGame());
+        yield return new WaitUntil(() => task1.IsCompleted);
+        var task2 = _stateManager.SendMatchStateMessage(MatchMessageType.RequestTrack, new MatchMessageRequestTrack());
+        yield return new WaitUntil(() => task2.IsCompleted);
+    }
+
+
 
     private string GetDeviceId()
     {

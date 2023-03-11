@@ -7,7 +7,7 @@ public class BattleConnection
 {
     public string MatchId { get; set; }
     public string HostId { get; set; }
-    public List<string> PlayerIds { get; set; }
+    public List<IUserPresence> Users { get; set; }
     public IMatchmakerMatched Matched { get; set; }
 
     public BattleConnection(IMatchmakerMatched matched)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Nakama;
 using System.Linq;
+using System.Threading.Tasks;
 
 public class GameStateManager
 {
@@ -28,7 +29,7 @@ public class GameStateManager
         OnTrackSelected?.Invoke(matchMessageTrackSelected);
     }
 
-    public void SendMatchStateMessage<T>(T message) where T : MatchMessage<T>
+    public async Task SendMatchStateMessage<T>(MatchMessageType opCode, T message) where T : MatchMessage<T>
     {
         try
         {
@@ -37,7 +38,7 @@ public class GameStateManager
 
             //Sending match state json along with opCode needed for unpacking message to server.
             //Then server sends it to other players
-            _connection.Socket.SendMatchStateAsync(_connection.BattleConnection.MatchId, 1, json);
+            await _connection.Socket.SendMatchStateAsync(_connection.BattleConnection.MatchId, (long)opCode, json);
         }
         catch (Exception e)
         {
