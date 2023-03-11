@@ -12,6 +12,7 @@ public class TrackGrid : MonoBehaviour
     [SerializeField] private SerializableDictionary<string, GameObject> TileSet;
     [SerializeField] private float m_generationSpeed = 0.2f;
     [SerializeField] private GameObject Train;
+    private Limits limits = new Limits();
 
     public void Start()
     {
@@ -35,6 +36,7 @@ public class TrackGrid : MonoBehaviour
                 {
                     tileType = "Start";
                     orientation = Direction.East;
+                    
                 }
                 else if (x == 1 && y == 0)
                 {
@@ -63,6 +65,13 @@ public class TrackGrid : MonoBehaviour
                     .GetComponent<TrackTile>();
                 tile.SetState(new Vector2Int(x, y), orientation);
 
+                if (x == 0 && y == 0)
+                {
+                    limits.BottomLeft = tile.transform;
+                } else if (x == m_gridDims.x - 1 && y == m_gridDims.y - 1)
+                {
+                    limits.TopRight = tile.transform;
+                }
                 m_gridTiles.Add(tile.gameObject);
                 
 
@@ -70,11 +79,11 @@ public class TrackGrid : MonoBehaviour
             }
         }
         
-        // var firstLocation = m_gridTiles.Find(go =>
-        //     go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
-        // var tren = Instantiate(Train, new Vector3(0, 0.8f, 0),
-        //     Quaternion.identity).GetComponent<Train>();
-        // tren.SetDestination(firstLocation.transform.position);
+        var firstLocation = m_gridTiles.Find(go =>
+            go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
+        var tren = Instantiate(Train, new Vector3(0, 0.8f, 0),
+            Quaternion.identity).GetComponent<Train>();
+        tren.SetDestination(firstLocation.transform.position);
     }
 
     private void ClearTiles()
@@ -171,4 +180,10 @@ public class TrackGrid : MonoBehaviour
         
         return currentDirection;
     }
+}
+
+public struct Limits
+{
+    public Transform BottomLeft;
+    public Transform TopRight;
 }
