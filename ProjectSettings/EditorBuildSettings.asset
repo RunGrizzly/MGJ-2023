@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: c07168c1cc5dbd749bc67c17d297231f
+  - enabled: 1
+    path: Assets/Scenes/KYLE.unity
+    guid: 9bccf9ae8ef9aeb48a2566407e3f8249
+  - enabled: 1
+    path: Assets/Scenes/LoopTest.unity
+    guid: 61d4853a00a182b4a879bf5b1977f17f
   m_configObjects: {}

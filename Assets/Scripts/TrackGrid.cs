@@ -12,6 +12,9 @@ public class TrackGrid : MonoBehaviour
     [SerializeField] private SerializableDictionary<string, GameObject> TileSet;
     [SerializeField] private float m_generationSpeed = 0.2f;
     [SerializeField] private GameObject Train;
+    [SerializeField] private Transform m_tileHolder;
+
+
     public Limits limits = new Limits();
 
     public void Start()
@@ -66,8 +69,8 @@ public class TrackGrid : MonoBehaviour
                     tileType = "Straight";
                 }
 
-                TrackTile tile = Instantiate(GetTile(tileType), new Vector3(x, 0, y), Quaternion.identity)
-                    .GetComponent<TrackTile>();
+                TrackTile tile = Instantiate(GetTile(tileType), new Vector3(x, 0, y), Quaternion.identity).GetComponent<TrackTile>();
+                tile.transform.SetParent(m_tileHolder);
                 tile.SetState(new Vector2Int(x, y), orientation);
 
                 if (x == 0 && y == 0)
@@ -90,10 +93,9 @@ public class TrackGrid : MonoBehaviour
         Brain.ins.EventManager.gridCompleted.Invoke(this);
 
 
-        var firstLocation = m_gridTiles.Find(go =>
-            go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
-        var tren = Instantiate(Train, new Vector3(0, 0.8f, 0),
-            Quaternion.identity).GetComponent<Train>();
+        var firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
+        var tren = Instantiate(Train, new Vector3(0, 0.8f, 0), Quaternion.identity).GetComponent<Train>();
+        tren.transform.SetParent(transform);
         tren.SetDestination(firstLocation.transform.position);
 
 
