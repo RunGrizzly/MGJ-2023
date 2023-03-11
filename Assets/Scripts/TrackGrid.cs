@@ -12,6 +12,7 @@ public class TrackGrid : MonoBehaviour
     [SerializeField] private SerializableDictionary<string, GameObject> TileSet;
     [SerializeField] private float m_generationSpeed = 0.2f;
     [SerializeField] private GameObject Train;
+    private Limits limits = new Limits();
 
     public void Start()
     {
@@ -35,6 +36,7 @@ public class TrackGrid : MonoBehaviour
                 {
                     tileType = "Start";
                     orientation = Direction.East;
+
                 }
                 else if (x == 1 && y == 0)
                 {
@@ -68,6 +70,14 @@ public class TrackGrid : MonoBehaviour
                     .GetComponent<TrackTile>();
                 tile.SetState(new Vector2Int(x, y), orientation);
 
+                if (x == 0 && y == 0)
+                {
+                    limits.BottomLeft = tile.transform;
+                }
+                else if (x == m_gridDims.x - 1 && y == m_gridDims.y - 1)
+                {
+                    limits.TopRight = tile.transform;
+                }
                 m_gridTiles.Add(tile.gameObject);
 
 
@@ -177,4 +187,10 @@ public class TrackGrid : MonoBehaviour
 
         return currentDirection;
     }
+}
+
+public struct Limits
+{
+    public Transform BottomLeft;
+    public Transform TopRight;
 }
