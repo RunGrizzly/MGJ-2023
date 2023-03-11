@@ -12,7 +12,7 @@ public class TrackGrid : MonoBehaviour
     [SerializeField] private SerializableDictionary<string, GameObject> TileSet;
     [SerializeField] private float m_generationSpeed = 0.2f;
     [SerializeField] private GameObject Train;
-    private Limits limits = new Limits();
+    public Limits limits = new Limits();
 
     public void Start()
     {
@@ -83,13 +83,20 @@ public class TrackGrid : MonoBehaviour
 
                 yield return new WaitForSeconds(m_generationSpeed);
             }
+
         }
+
+        //The grid has finished generating - lets the event manager know
+        Brain.ins.EventManager.gridCompleted.Invoke(this);
+
 
         var firstLocation = m_gridTiles.Find(go =>
             go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
         var tren = Instantiate(Train, new Vector3(0, 0.8f, 0),
             Quaternion.identity).GetComponent<Train>();
         tren.SetDestination(firstLocation.transform.position);
+
+
     }
 
     private void ClearTiles()

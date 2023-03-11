@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <SceneLoader>k__BackingField: {fileID: 781916002}
+  <EventManager>k__BackingField: {fileID: 781916004}
 --- !u!4 &781916001
 Transform:
   m_ObjectHideFlags: 0
@@ -276,12 +277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac212333ebf4cc043a38f992874ad235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleStarted:
-    m_PersistentCalls:
-      m_Calls: []
-  battleEnded:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &890750336
 GameObject:
   m_ObjectHideFlags: 0
