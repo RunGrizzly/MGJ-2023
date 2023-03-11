@@ -4,6 +4,7 @@ using UnityEngine;
 using Nakama;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 public class NakamaManager : MonoBehaviour
 {
@@ -81,7 +82,47 @@ public class NakamaManager : MonoBehaviour
         }
 
         _connection.Init(client, socket, account, session);
-        var match = await socket.CreateMatchAsync("frank");
+
+        socket.Connected += OnSocketConnected;
+    }
+
+    private async void OnSocketConnected()
+    {
+        var party = await _connection.Socket.CreatePartyAsync(true, GameConstants.MaxPlayerCount + 1);
+        _connection.Party = party;
+        _connection.Socket.ReceivedPartyJoinRequest += OnReceivedPartyJoinRequest;
+
+    }
+
+    private async void OnReceivedPartyJoinRequest(IPartyJoinRequest request)
+    {
+        foreach (var presence in request.Presences)
+        {
+            await _connection.Socket.AcceptPartyMemberAsync(request.PartyId, presence);
+            _connection.Party.Presences.Append(presence);
+        }
+
+        if (_connection.Party.Presences.Count() > 2)
+        {
+            await StartBattle();
+        }
+    }
+
+    private async Task StartBattle()
+    {
+        _connection.Socket.ReceivedMatchmakerMatched += ReceivedMatchmakerMatched;
+
+        await _connection.Socket.AddMatchmakerPartyAsync(_connection.Party.Id, "*", 3, GameConstants.MaxPlayerCount + 1);
+    }
+
+
+    private async void ReceivedMatchmakerMatched(IMatchmakerMatched matched)
+    {
+        _connection.BattleConnection.Matched = matched;
+        var match = await _connection.Socket.JoinMatchAsync(matched);
+        _connection.BattleConnection.MatchId = match.Id;
+        _connection.BattleConnection.PlayerIds = match.Presences.Select(p => p.UserId).ToList();
+
     }
 
     private string GetDeviceId()

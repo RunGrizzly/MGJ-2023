@@ -12,6 +12,7 @@ public class GameConnection : ScriptableObject
     public IClient Client => _client;
     public ISocket Socket => _socket;
     public BattleConnection BattleConnection { get; set; }
+    public IParty Party { get; set; }
 
     public void Init(IClient client, ISocket socket, IApiAccount account, ISession session)
     {
