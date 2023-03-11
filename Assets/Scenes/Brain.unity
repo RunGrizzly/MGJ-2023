@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 781916001}
   - component: {fileID: 781916000}
   - component: {fileID: 781916002}
+  - component: {fileID: 781916003}
   m_Layer: 0
   m_Name: Brain
   m_TagString: Untagged
@@ -249,6 +250,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9b1d1f03bad0d6498664fcf9766f2c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!81 &781916003
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781915999}
+  m_Enabled: 1
 --- !u!1 &890750336
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,7 +328,7 @@ MonoBehaviour:
       editorAssetGUID: dbaa0dc4f95b8454c833fa0d5744ecfa
       name: Camera
       _path: Assets/Scenes/Camera.unity
-    loadInEditor: 1
+    loadInEditor: 0
     loadMethod: 3
   - scene:
       editorAssetGUID: c07168c1cc5dbd749bc67c17d297231f

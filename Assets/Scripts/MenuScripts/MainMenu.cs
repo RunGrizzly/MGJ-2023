@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private List<CanvasGroup> m_panels = new List<CanvasGroup>();
+    [SerializeField] AudioSource m_audioSource = null;
+    [SerializeField] Slider m_audioSlider = null;
 
     //A list to track all active tweens
     private List<int> m_activeTweens = new List<int>();
@@ -30,9 +32,9 @@ public class MainMenu : MonoBehaviour
         button.transform.parent.gameObject.SetActive(false);
     }
 
-    public void AdjustVolume(Slider slider)
+    public void Update()
     {
-        AudioListener.volume = slider.value;
+        m_audioSource.volume = m_audioSlider.value;
     }
 
 
@@ -60,6 +62,11 @@ public class MainMenu : MonoBehaviour
             }
             else
             {
+                // //Move all off screen
+                // foreach (Transform child in transform)
+                // {
+                //     LeanTween.move(child.gameObject, new Vector3(50f, child.position.y, child.position.z), 0.65f).setEase(LeanTweenType.easeOutBack);
+                // }
                 panel.interactable = false;
                 panel.blocksRaycasts = false;
 
