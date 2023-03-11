@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d5ad5820255d747909799c30dd3a67, type: 3}
+  m_Name: DefaultColorSets
+  m_EditorClassIdentifier: 
+  ColorSets:
+  - MainColor: {r: 0.8113208, g: 0.18879786, b: 0.18879786, a: 1}
+    SecColor: {r: 0.9010616, g: 0.9339623, b: 0.33187962, a: 1}
+    TertiaryColor: {r: 1, g: 1, b: 1, a: 1}
+  - MainColor: {r: 0.24237561, g: 0.8962264, b: 0.7694595, a: 1}
+    SecColor: {r: 0.8867924, g: 0.4087246, b: 0.17289655, a: 1}
+    TertiaryColor: {r: 0.23944333, g: 0.21772279, b: 0.38679248, a: 1}
+  - MainColor: {r: 0.7276842, g: 0.2890708, b: 0.7924528, a: 1}
+    SecColor: {r: 0.3037854, g: 0.754717, b: 0.5058678, a: 1}
+    TertiaryColor: {r: 1, g: 1, b: 1, a: 1}
+  - MainColor: {r: 0.41936627, g: 0.8773585, b: 0.46243733, a: 1}
+    SecColor: {r: 0.068233036, g: 0.4339623, b: 0.29787865, a: 1}
+    TertiaryColor: {r: 0.72221124, g: 0.4938293, b: 0.7735849, a: 1}

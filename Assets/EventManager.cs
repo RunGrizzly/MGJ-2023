@@ -2,7 +2,9 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class BattleStartedEvent : UnityEvent { }
-public class BattleEndedEvent : UnityEvent { }
+
+//The battle has ended - pass through the winning train
+public class BattleEndedEvent : UnityEvent<Train> { }
 public class GridCompletedEvent : UnityEvent<TrackGrid> { }
 
 public class EventManager : MonoBehaviour

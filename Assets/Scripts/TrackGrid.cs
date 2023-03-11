@@ -7,6 +7,9 @@ using UnityEngine;
 
 public class TrackGrid : MonoBehaviour
 {
+    [SerializeField] private TrainColorSet m_trainColorSet = null;
+    private List<ColorSet> m_availableColorSets = null;
+
     [SerializeField] private Vector2Int m_gridDims = Vector2Int.zero;
     List<GameObject> m_gridTiles = new List<GameObject>();
     [SerializeField] private SerializableDictionary<string, GameObject> TileSet;
@@ -14,12 +17,18 @@ public class TrackGrid : MonoBehaviour
     [SerializeField] private GameObject Train;
     [SerializeField] private Transform m_tileHolder;
 
+    public List<Train> Trains = new List<Train>();
+
+
+
 
     public Limits limits = new Limits();
 
     public void Start()
     {
         StartCoroutine(GenerateGrid());
+        m_availableColorSets = new List<ColorSet>(m_trainColorSet.ColorSets);
+
     }
 
     public IEnumerator GenerateGrid()
@@ -92,14 +101,32 @@ public class TrackGrid : MonoBehaviour
         //The grid has finished generating - lets the event manager know
         Brain.ins.EventManager.gridCompleted.Invoke(this);
 
-
-        var firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
-        var tren = Instantiate(Train, new Vector3(0, 0.8f, 0), Quaternion.identity).GetComponent<Train>();
-        tren.transform.SetParent(transform);
-        tren.SetDestination(firstLocation.transform.position);
+        //Test spawn multiple trains
+        Trains.Add(SpawnTrain());
+        yield return new WaitForSeconds(3);
+        Trains.Add(SpawnTrain());
+        yield return new WaitForSeconds(3);
+        Trains.Add(SpawnTrain());
+        yield return new WaitForSeconds(3);
 
 
     }
+
+    private Train SpawnTrain()
+    {
+        var firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
+        var train = Instantiate(Train, new Vector3(0, 0.8f, 0), Quaternion.identity).GetComponent<Train>();
+        train.transform.SetParent(transform);
+        train.SetDestination(firstLocation.transform.position);
+
+        ColorSet newColorSet = m_availableColorSets[UnityEngine.Random.Range(0, m_availableColorSets.Count)];
+
+        train.Decorate(newColorSet);
+        m_availableColorSets.Remove(newColorSet);
+
+        return train;
+    }
+
 
     private void ClearTiles()
     {

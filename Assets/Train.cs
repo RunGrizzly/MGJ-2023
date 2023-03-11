@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Train : MonoBehaviour
 {
+    [SerializeField] private Material m_material;
+    [SerializeField] private Renderer m_renderer;
     public Direction m_direction = Direction.East;
 
     public Transform startMarker;
@@ -17,13 +19,15 @@ public class Train : MonoBehaviour
     private float m_journeyLength;
 
     private float timeElapsed;
-    // Start is called before the first frame update
+
+
+
 
     public void SetDestination(Vector3 end)
     {
         m_direction = Direction.East;
         endMarker = end;
-        
+
         var trueEnd = new Vector3(end.x, transform.position.y, end.z);
         //endMarker.position = new Vector3(position.x, 0.8f, position.z);
         endMarker = trueEnd;
@@ -48,13 +52,13 @@ public class Train : MonoBehaviour
                         position = new Vector3(position.x + 0.5f * Time.deltaTime, position.y, position.z);
                         break;
                     case Direction.North:
-                        position = new Vector3(position.x, position.y, position.z  + 0.5f * Time.deltaTime);
+                        position = new Vector3(position.x, position.y, position.z + 0.5f * Time.deltaTime);
                         break;
                     case Direction.West:
                         position = new Vector3(position.x - 0.5f * Time.deltaTime, position.y, position.z);
                         break;
                     case Direction.South:
-                        position = new Vector3(position.x, position.y, position.z  - 0.5f * Time.deltaTime);
+                        position = new Vector3(position.x, position.y, position.z - 0.5f * Time.deltaTime);
                         break;
                 }
 
@@ -70,7 +74,7 @@ public class Train : MonoBehaviour
             }
         }
     }
-    
+
     private (Vector3, Direction) ChooseNextDirection()
     {
         return GameObject.Find("TrackGrid").GetComponent<TrackGrid>().GetNextTile(transform.position, m_direction);
@@ -91,8 +95,18 @@ public class Train : MonoBehaviour
         // return Vector3.forward;
     }
 
-}
 
+    public void Decorate(ColorSet newColorSet)
+    {
+        Material newMaterial = new Material(m_material);
+
+        newMaterial.SetColor("_MainColor", newColorSet.MainColor);
+        newMaterial.SetColor("_SecColor", newColorSet.SecColor);
+        newMaterial.SetColor("_TertiaryColor", newColorSet.TertiaryColor);
+
+        m_renderer.material = newMaterial;
+    }
+}
 
 public enum Direction
 {

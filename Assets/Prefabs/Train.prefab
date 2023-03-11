@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5eb571ed4ca24e4b9981645fa2c441e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_material: {fileID: 2100000, guid: 7f6fdc3f9d550c444b65e32be13e7215, type: 2}
+  m_renderer: {fileID: 7865635828053267748}
   m_direction: 1
   startMarker: {fileID: 0}
   endMarker: {x: -Infinity, y: -Infinity, z: -Infinity}

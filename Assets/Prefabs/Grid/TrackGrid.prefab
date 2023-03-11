@@ -76,6 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83033a5c4bd4ce44dbe7331d1701141c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_trainColorSet: {fileID: 11400000, guid: 602ff2e523b8aa649af4a54653c5bc9b, type: 2}
   m_gridDims: {x: 10, y: 10}
   TileSet:
     m_keys:
@@ -93,3 +94,4 @@ MonoBehaviour:
   m_generationSpeed: 0.025
   Train: {fileID: 7406964780268013954, guid: 76ab54bb0a00fac48bf879740f2bbcda, type: 3}
   m_tileHolder: {fileID: 7435169922117587852}
+  Trains: []
