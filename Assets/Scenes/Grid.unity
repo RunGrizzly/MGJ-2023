@@ -130,6 +130,77 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: Train
+      value: 
+      objectReference: {fileID: 7035665893271451779, guid: 3ad4683d34a860b4495d8e9288ac5436,
+        type: 3}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: m_gridDims.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: m_gridDims.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: m_generationSpeed
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: TileSet.m_keys.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: TileSet.m_values.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: TileSet.m_keys.Array.data[3]
+      value: LeftTurn
+      objectReference: {fileID: 0}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: TileSet.m_keys.Array.data[4]
+      value: RightTurn
+      objectReference: {fileID: 0}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: TileSet.m_values.Array.data[0]
+      value: 
+      objectReference: {fileID: 495639522856828005, guid: e9843a9d260609e4d931837db59930cd,
+        type: 3}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: TileSet.m_values.Array.data[1]
+      value: 
+      objectReference: {fileID: 5648307996134000079, guid: 05ddc2e5c29024341941c0c273c4b3c5,
+        type: 3}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: TileSet.m_values.Array.data[2]
+      value: 
+      objectReference: {fileID: 1259197369456740459, guid: 668d77b6eaa8a354d9dda9a240ebd070,
+        type: 3}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: TileSet.m_values.Array.data[3]
+      value: 
+      objectReference: {fileID: 2715091823660752906, guid: ddd458571f1e45f4ebca3ed75a9f77d9,
+        type: 3}
+    - target: {fileID: 133171310953677592, guid: 89cf837f981931541858d1c003f8f2a1,
+        type: 3}
+      propertyPath: TileSet.m_values.Array.data[4]
+      value: 
+      objectReference: {fileID: 2418425240695382919, guid: 66cc91e32de3c4140ba913ba49416c47,
+        type: 3}
     - target: {fileID: 814845323747982080, guid: 89cf837f981931541858d1c003f8f2a1,
         type: 3}
       propertyPath: m_RootOrder

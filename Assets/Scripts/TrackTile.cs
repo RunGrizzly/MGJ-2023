@@ -4,8 +4,7 @@ public abstract class TrackTile: MonoBehaviour
 {
     public Vector2Int m_position;
     [SerializeField]protected bool m_isReplaceable;
-    [SerializeField]protected Color m_mesh;
-    [SerializeField] public Orientation orientation = Orientation.Horizontal;
+    [SerializeField] public Direction m_orientation = Direction.North;
     protected TrackTile()
     {
         //Using -1 -1 to say we're "off-grid"
@@ -14,7 +13,6 @@ public abstract class TrackTile: MonoBehaviour
 
     private void Start()
     {
-        SetTileMesh();
         StartAnimation();
     }
 
@@ -23,20 +21,21 @@ public abstract class TrackTile: MonoBehaviour
         LeanTween.scale(gameObject, Vector3.one * 1.25f, 0.75f).setEase(LeanTweenType.punch);
     }
 
-    public void SetState(Vector2Int position)
+    public void SetState(Vector2Int position, Direction orientation = Direction.North)
     {
         m_position = position;
+        m_orientation = orientation;
+        switch (m_orientation)
+        {
+            case Direction.East:
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 90.0f, transform.eulerAngles.z);
+                break;
+            case Direction.West:
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, -90.0f, transform.eulerAngles.z);
+                break;
+            case Direction.South:
+                transform.eulerAngles = new Vector3(transform.eulerAngles.x, 180.0f, transform.eulerAngles.z);
+                break;
+        }
     }
-
-    protected void SetTileMesh()
-    {
-        Renderer renderer = gameObject.GetComponent<Renderer>();
-        renderer.material.color = m_mesh;
-    }
-}
-
-public enum Orientation
-{
-    Vertical,
-    Horizontal
 }

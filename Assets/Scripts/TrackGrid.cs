@@ -30,16 +30,20 @@ public class TrackGrid : MonoBehaviour
             for (int y = 0; y < m_gridDims.y; y++)
             {
                 var tileType = "Empty";
+                var orientation = Direction.North;
                 if (x == 0 && y == 0)
                 {
                     tileType = "Start";
+                    orientation = Direction.East;
                 }
                 else if (x == 1 && y == 0)
                 {
                     tileType = "Straight";
+                    orientation = Direction.East;
                 } else if (x == 2 && y == 0)
                 {
                     tileType = "LeftTurn";
+                    orientation = Direction.East;
                 } else if (x == 2 && y < 3)
                 {
                     tileType = "Straight";
@@ -49,6 +53,7 @@ public class TrackGrid : MonoBehaviour
                 } else if (x == 1 && y == 3)
                 {
                     tileType = "RightTurn";
+                    orientation = Direction.West;
                 } else if (x == 1 && y is > 3 and < 6)
                 {
                     tileType = "Straight";
@@ -56,9 +61,10 @@ public class TrackGrid : MonoBehaviour
 
                 TrackTile tile = Instantiate(GetTile(tileType), new Vector3(x, 0, y), Quaternion.identity)
                     .GetComponent<TrackTile>();
+                tile.SetState(new Vector2Int(x, y), orientation);
 
                 m_gridTiles.Add(tile.gameObject);
-                tile.SetState(new Vector2Int(x, y));
+                
 
                 yield return new WaitForSeconds(m_generationSpeed);
             }
