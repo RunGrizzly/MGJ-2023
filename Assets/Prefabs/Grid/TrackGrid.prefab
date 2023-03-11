@@ -44,6 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83033a5c4bd4ce44dbe7331d1701141c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_gridDims: {x: 5, y: 5}
-  m_tileHolder: {fileID: 7030794406023439344, guid: 2c278ee7127ffac40b0bbbc9edc56734,
-    type: 3}
+  m_gridDims: {x: 10, y: 10}
+  TileSet:
+    m_keys:
+    - Empty
+    - Start
+    - Straight
+    - LeftTurn
+    - RightTurn
+    m_values:
+    - {fileID: 495639522856828005, guid: e9843a9d260609e4d931837db59930cd, type: 3}
+    - {fileID: 5648307996134000079, guid: 05ddc2e5c29024341941c0c273c4b3c5, type: 3}
+    - {fileID: 1259197369456740459, guid: 668d77b6eaa8a354d9dda9a240ebd070, type: 3}
+    - {fileID: 2715091823660752906, guid: ddd458571f1e45f4ebca3ed75a9f77d9, type: 3}
+    - {fileID: 2418425240695382919, guid: 66cc91e32de3c4140ba913ba49416c47, type: 3}
+  m_generationSpeed: 0.025
+  Train: {fileID: 7406964780268013954, guid: 76ab54bb0a00fac48bf879740f2bbcda, type: 3}

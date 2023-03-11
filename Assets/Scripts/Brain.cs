@@ -12,6 +12,7 @@ public class Brain : MonoBehaviour
     }
 
     [field: SerializeField] public SceneLoader SceneLoader { get; set; } = null;
+    [field: SerializeField] public EventManager EventManager { get; set; } = null;
 
 
 }

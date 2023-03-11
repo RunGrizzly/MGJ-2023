@@ -1,22 +1,38 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [ExecuteAlways]
-public class FoliButton : MonoBehaviour
+public class FoliButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
-    public TMP_Text text;
-    public float min;
-    public float max;
-    public float speed;
+
+    [SerializeField] private float m_hoverSize;
+
+    int eventTween = 0;
 
     public Button button;
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        LeanTween.cancel(eventTween);
+        eventTween = LeanTween.scale(gameObject, Vector3.one * m_hoverSize, 0.45f).setEase(LeanTweenType.easeOutExpo).setOnComplete(() => transform.localScale = Vector3.one * m_hoverSize).id;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        LeanTween.cancel(eventTween);
+        eventTween = LeanTween.scale(gameObject, Vector3.one, 0.45f).setEase(LeanTweenType.easeOutExpo).setOnComplete(() => transform.localScale = Vector3.one).id;
+    }
+
     void Update()
     {
-        var l = Mathf.InverseLerp(-1, 1, Mathf.Sin(speed * Time.time));
-        var f = Mathf.Lerp(min, max, l);
 
-        text.transform.localScale = Vector3.one * f;
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        LeanTween.cancel(eventTween);
+        eventTween = LeanTween.scale(gameObject, Vector3.one * 1.5f, 1f).setEase(LeanTweenType.punch).id;
     }
 }

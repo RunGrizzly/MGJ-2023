@@ -11,13 +11,13 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
+        UnloadScenes(new List<string> { "UI", "BattleScene", "Camera" });
         LoadScenes(new List<string> { "MainMenu" });
     }
     public void LoadBattleScene()
     {
         UnloadScenes(new List<string> { "MainMenu" });
-        LoadScenes(new List<string> { "Camera" });
-        LoadScenes(new List<string> { "BattleScene" });
+        LoadScenes(new List<string> { "Camera", "BattleScene", "UI" });
     }
 
     void LoadScenes(List<string> scenes)
