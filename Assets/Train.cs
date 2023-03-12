@@ -33,7 +33,8 @@ public class Train : MonoBehaviour
     public void SetDestination(Vector3 end, Direction direction = Direction.East)
     {
         m_direction = direction;
-        endMarker = end;
+        //Trash code
+        //endMarker = end;
 
         var trueEnd = new Vector3(end.x, transform.position.y, end.z);
         endMarker = trueEnd;
@@ -50,6 +51,7 @@ public class Train : MonoBehaviour
         if (endMarker != Vector3.negativeInfinity)
         {
             var position = transform.position;
+            //We have reached dest  - find new direction
             if (Vector2.Distance(new Vector2(position.x, position.z), new Vector2(endMarker.x, endMarker.z)) >= 0.02)
             {
                 switch (m_direction)
@@ -70,10 +72,10 @@ public class Train : MonoBehaviour
 
                 transform.position = position;
             }
+            //We are in transit
             else
             {
                 //snap to destination
-
                 transform.position = new Vector3(endMarker.x, position.y, endMarker.z);
 
                 var currentTile = _trackGrid.GetTileByVector3(endMarker);
@@ -81,7 +83,7 @@ public class Train : MonoBehaviour
                 {
                     var nextDirection = ChooseNextDirection();
                     var gridTile = nextDirection.Item1;
-                    endMarker = new Vector3(gridTile.transform.position.x, 0.8f, gridTile.transform.position.z);
+                    endMarker = new Vector3(gridTile.transform.position.x, transform.position.y, gridTile.transform.position.z);
                     m_direction = nextDirection.Item2;
                     SetRotation(m_direction);
                     Brain.ins.EventManager.trainDestinationUpdate?.Invoke(this);
@@ -101,6 +103,7 @@ public class Train : MonoBehaviour
 
     public void Kill()
     {
+        Debug.LogFormat("$The train {0} was killed", TrainName);
         Brain.ins.EventManager.battleEnded.Invoke((this, false));
         m_explodeVFX.Play();
         LeanTween.delayedCall(m_explodeVFX.main.startLifetime.constantMax / 2, () =>
