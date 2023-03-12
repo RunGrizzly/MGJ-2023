@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Train : MonoBehaviour
@@ -8,6 +9,7 @@ public class Train : MonoBehaviour
     [SerializeField] private Material m_material;
     [SerializeField] private Renderer m_bodyRenderer;
     [SerializeField] private Renderer m_faceRenderer;
+    [SerializeField] private TextMeshProUGUI m_label;
     public Direction m_direction = Direction.East;
 
     public Transform startMarker;
@@ -95,6 +97,9 @@ public class Train : MonoBehaviour
         Material newFaceMaterial = new Material(m_faceRenderer.sharedMaterial);
         newFaceMaterial.SetTexture("_Face", newColorSet.Face);
         m_faceRenderer.material = newFaceMaterial;
+
+        m_label.text = newColorSet.Name;
+
     }
 
     private void SetRotation(Direction direction)
