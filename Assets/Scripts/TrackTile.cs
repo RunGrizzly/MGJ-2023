@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public abstract class TrackTile: MonoBehaviour
+public abstract class TrackTile : MonoBehaviour
 {
     public Vector2Int m_position;
-    [SerializeField]protected bool m_isReplaceable;
+    [SerializeField] protected bool m_isReplaceable;
     [SerializeField] public Direction m_orientation = Direction.North;
+
     protected TrackTile()
     {
         //Using -1 -1 to say we're "off-grid"
@@ -38,4 +39,7 @@ public abstract class TrackTile: MonoBehaviour
                 break;
         }
     }
+
+    public abstract bool CanApproach(Direction direction);
+
 }

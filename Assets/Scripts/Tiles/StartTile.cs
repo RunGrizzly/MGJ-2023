@@ -6,5 +6,10 @@ namespace Tiles
     {
         private StartTile()
         { }
+
+        public override bool CanApproach(Direction direction)
+        {
+            return false;
+        }
     }
 }
