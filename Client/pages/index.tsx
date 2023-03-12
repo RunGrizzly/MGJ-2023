@@ -78,9 +78,7 @@ const InGame = ({ client }: Props) => {
           </button>
         </div>
       )}
-      {match.isAlive && match.isWinner && (
-        <h2 className="message">YOU WON!!!</h2>
-      )}
+      {match.isWinner && <h2 className="message">YOU WON!!!</h2>}
       {!match.isAlive && !match.isWinner && (
         <>
           <h2 className="message">YOU DIED!!!</h2>
@@ -93,7 +91,7 @@ const InGame = ({ client }: Props) => {
   );
 };
 
-const client = new Client("defaultkey", "172.25.120.251", "7350");
+const client = new Client("defaultkey", "192.168.0.100", "7350");
 const socket = client.createSocket();
 
 const useClient = () => {
@@ -124,7 +122,7 @@ const useClient = () => {
         setMatchInProgress(false);
       }
     },
-    match ? null : 1000
+    !session || match ? null : 1000
   );
 
   async function connect() {
@@ -158,9 +156,8 @@ const useClient = () => {
   useEffect(() => {
     async function login() {
       const account = await client.authenticateDevice(
-        "clientclientclient",
-        true,
-        "client"
+        "clientclientclient" + Math.floor(Math.random() * 1000),
+        true
       );
       setSession(account);
     }
