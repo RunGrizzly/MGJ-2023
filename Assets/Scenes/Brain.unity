@@ -205,6 +205,7 @@ GameObject:
   - component: {fileID: 781916003}
   - component: {fileID: 781916004}
   - component: {fileID: 781916005}
+  - component: {fileID: 781916006}
   m_Layer: 0
   m_Name: Brain
   m_TagString: Untagged
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SceneLoader>k__BackingField: {fileID: 781916002}
   <EventManager>k__BackingField: {fileID: 781916004}
-  <BattleManager>k__BackingField: {fileID: 0}
+  <BattleManager>k__BackingField: {fileID: 781916006}
 --- !u!4 &781916001
 Transform:
   m_ObjectHideFlags: 0
@@ -375,6 +376,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &781916006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781915999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5831793f354824649a14d2f9f9777121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _connection: {fileID: 11400000, guid: a8698fe4b5ae1264fa9ea24937fc6619, type: 2}
 --- !u!1 &890750336
 GameObject:
   m_ObjectHideFlags: 0

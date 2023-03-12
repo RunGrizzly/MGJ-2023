@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Tiles;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TrackGrid : MonoBehaviour
@@ -121,7 +119,9 @@ public class TrackGrid : MonoBehaviour
         straightBlock.GetComponent<TrackTile>().SetState(new Vector2Int(0, 0), Direction.East);
 
         m_gridTiles.Remove(firstLocation);
-        m_gridTiles.Remove(straightBlock);
+        m_gridTiles.Remove(spawnLocation);
+        Destroy(firstLocation);
+        Destroy(spawnLocation);
         m_gridTiles.Add(startBlock);
         m_gridTiles.Add(straightBlock);
 
@@ -142,12 +142,16 @@ public class TrackGrid : MonoBehaviour
         var currentTile = m_gridTiles.Find(tile => tile.GetComponent<TrackTile>().m_position.Equals(lookahead.postition));
         var tile = GetTile(type);
 
+        if (!currentTile.name.Contains("Empty"))
+        {
+            return;
+        }
+
         var newTile = Instantiate(tile, currentTile.transform.position, Quaternion.identity);
         m_gridTiles.Remove(currentTile);
-        m_gridTiles.Add(newTile);
+        Destroy(currentTile);
         newTile.GetComponent<TrackTile>().SetState(new Vector2Int((int)currentTile.transform.position.x, (int)currentTile.transform.position.z), lookahead.direction);
-
-
+        m_gridTiles.Add(newTile);
     }
 
     private void ClearTiles()
@@ -182,7 +186,7 @@ public class TrackGrid : MonoBehaviour
         return tile;
     }
 
-    public (Vector3, Direction) GetNextTile(Vector3 position, Direction currentDirection)
+    public (GameObject, Direction) GetNextTile(Vector3 position, Direction currentDirection)
     {
         var trainDirection = SelectNextDirection(position, currentDirection);
         GameObject gridTile = null;
@@ -206,9 +210,15 @@ public class TrackGrid : MonoBehaviour
                 break;
         }
 
-        return (new Vector3(gridTile.transform.position.x, 0.8f, gridTile.transform.position.z), trainDirection);
+        //return (new Vector3(gridTile.transform.position.x, 0.8f, gridTile.transform.position.z), trainDirection);
+        return (gridTile, trainDirection);
     }
 
+    public TrackTile GetTileByVector3(Vector3 vector)
+    {
+        var checkVector = new Vector3(vector.x, 0.0f, vector.z);
+        return m_gridTiles.Find(gT => gT.transform.position.Equals(checkVector)).GetComponent<TrackTile>();
+    }
     //TODO: Fix when train goes in to reversed turn
     public Direction SelectNextDirection(Vector3 position, Direction currentDirection)
     {

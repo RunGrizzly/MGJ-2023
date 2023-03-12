@@ -72,29 +72,29 @@ public class Train : MonoBehaviour
             else
             {
                 //snap to destination
+
                 transform.position = new Vector3(endMarker.x, position.y, endMarker.z);
-                var nextDirection = ChooseNextDirection();
-                endMarker = nextDirection.Item1;
-                m_direction = nextDirection.Item2;
-                SetRotation(m_direction);
-                Brain.ins.EventManager.trainDestinationUpdate?.Invoke(this);
+
+                var currentTile = _trackGrid.GetTileByVector3(endMarker);
+                if (currentTile.CanApproach(m_direction))
+                {
+                    var nextDirection = ChooseNextDirection();
+                    var gridTile = nextDirection.Item1;
+                    endMarker = new Vector3(gridTile.transform.position.x, 0.8f, gridTile.transform.position.z);
+                    m_direction = nextDirection.Item2;
+                    SetRotation(m_direction);
+                    Brain.ins.EventManager.trainDestinationUpdate?.Invoke(this);
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
+
             }
         }
     }
 
-    public void Kill()
-    {
-        m_explodeVFX.Play();
-        LeanTween.delayedCall(m_explodeVFX.main.startLifetime.constantMax / 2, () =>
-        {
-            m_bodyRenderer.enabled = false;
-            m_faceRenderer.enabled = false;
-            LeanTween.value(1, 0, 0.55f).setEase(LeanTweenType.easeOutQuad).setOnUpdate((val) => m_label.alpha = val);
-            LeanTween.delayedCall(m_explodeVFX.main.startLifetime.constantMax / 2, () => Destroy(gameObject));
-        });
-    }
-
-    private (Vector3, Direction) ChooseNextDirection()
+    private (GameObject, Direction) ChooseNextDirection()
     {
         return _trackGrid.GetNextTile(transform.position, m_direction);
     }
@@ -134,12 +134,12 @@ public class Train : MonoBehaviour
         }
 
     }
-
     public void SetLookahead(Vector3 position, Direction direction)
     {
-        var lookaheadTile = GameObject.Find("TrackGrid").GetComponent<TrackGrid>().GetNextTile(position, m_direction);
-        LookAheadTile = new Lookahead(new Vector2Int((int)lookaheadTile.Item1.x, (int)lookaheadTile.Item1.z),
-            direction);
+        var lookaheadTile = GameObject.Find("TrackGrid").GetComponent<TrackGrid>().GetNextTile(position, direction);
+
+        LookAheadTile = new Lookahead(new Vector2Int((int)lookaheadTile.Item1.transform.position.x, (int)lookaheadTile.Item1.transform.position.z),
+            lookaheadTile.Item2);
     }
 }
 
