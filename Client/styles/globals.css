@@ -32,8 +32,66 @@ ul {
   list-style: none;
 }
 
-button {
-  padding: 0.5em 1em;
-  font-weight: bold;
+.title {
+  text-align: center;
+  padding: .5em;
+  position: fixed;
+  left: 0;
+  right: 0;
   font-size: 3em;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  font-size: 3em;
+  text-transform: uppercase;
+  font-weight: 800;
+  padding: .5em .8em;
+  border-radius: 50px;
+}
+
+.waiting {
+  font-size: 2.5em;
+  padding: 0 .5em;
+  text-align: center;
+}
+
+.name {
+  font-size: 2em;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 .5em;
+  gap: .5em;
+}
+
+.button-row > button{
+  flex-grow: 1;
+  flex-basis: calc(100% / 3);
+  font-size: 1.2em;
+  font-weight: 800;
+  padding: 2em 0;
+}
+
+.button-row > button:not(:disabled){
+  border: 3px #50fb9d solid;
+  background-color: rgb(101, 255, 160);
+}
+
+.button-row > button:disabled{
+  background-color: rgb(173, 173, 173);
 }
