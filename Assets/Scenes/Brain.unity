@@ -459,25 +459,25 @@ MonoBehaviour:
       editorAssetGUID: dbaa0dc4f95b8454c833fa0d5744ecfa
       name: Camera
       _path: Assets/Scenes/Camera.unity
-    loadInEditor: 1
+    loadInEditor: 0
     loadMethod: 3
   - scene:
       editorAssetGUID: c07168c1cc5dbd749bc67c17d297231f
       name: BattleScene
       _path: Assets/Scenes/BattleScene.unity
-    loadInEditor: 0
+    loadInEditor: 1
     loadMethod: 3
   - scene:
       editorAssetGUID: 9bccf9ae8ef9aeb48a2566407e3f8249
       name: KYLE
       _path: Assets/Scenes/KYLE.unity
     loadInEditor: 0
-    loadMethod: 1
+    loadMethod: 3
   - scene:
       editorAssetGUID: 61d4853a00a182b4a879bf5b1977f17f
       name: LoopTest
       _path: Assets/Scenes/LoopTest.unity
-    loadInEditor: 1
+    loadInEditor: 0
     loadMethod: 3
   _isMainScene: 0
   _version: 1

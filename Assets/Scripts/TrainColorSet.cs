@@ -9,6 +9,7 @@ public class ColorSet
     public Color SecColor;
     public Color TertiaryColor;
     public Texture2D Face;
+    public string Name;
 }
 
 [CreateAssetMenu(fileName = "New Color Set", menuName = "Color Sets/New Color Set", order = 1)]
