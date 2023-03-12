@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Brain : MonoBehaviour
@@ -14,6 +13,6 @@ public class Brain : MonoBehaviour
     [field: SerializeField] public SceneLoader SceneLoader { get; set; } = null;
     [field: SerializeField] public EventManager EventManager { get; set; } = null;
     [field: SerializeField] public BattleManager BattleManager { get; set; } = null;
-
+    [field: SerializeField] public GameStateController GameStateController { get; set; } = null;
 
 }

@@ -54,16 +54,16 @@ public class Train : MonoBehaviour
                 switch (m_direction)
                 {
                     case Direction.East:
-                        position = new Vector3(position.x + 0.5f * Time.deltaTime, position.y, position.z);
+                        position = new Vector3(position.x + speed * Time.deltaTime, position.y, position.z);
                         break;
                     case Direction.North:
-                        position = new Vector3(position.x, position.y, position.z + 0.5f * Time.deltaTime);
+                        position = new Vector3(position.x, position.y, position.z + speed * Time.deltaTime);
                         break;
                     case Direction.West:
-                        position = new Vector3(position.x - 0.5f * Time.deltaTime, position.y, position.z);
+                        position = new Vector3(position.x - speed * Time.deltaTime, position.y, position.z);
                         break;
                     case Direction.South:
-                        position = new Vector3(position.x, position.y, position.z - 0.5f * Time.deltaTime);
+                        position = new Vector3(position.x, position.y, position.z - speed * Time.deltaTime);
                         break;
                 }
 
@@ -89,7 +89,6 @@ public class Train : MonoBehaviour
                 {
                     Kill();
                 }
-
             }
         }
     }
