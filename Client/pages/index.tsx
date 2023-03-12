@@ -56,26 +56,39 @@ const InGame = ({ client }: Props) => {
   return (
     <>
       <h2 className="name">{match.name}</h2>
-      <div className="button-row">
-        <button
-          disabled={match.tileRequests === 0}
-          onClick={() => match.onSelectTrack("LeftTurn")}
-        >
-          LEFT
-        </button>
-        <button
-          disabled={match.tileRequests === 0}
-          onClick={() => match.onSelectTrack("Straight")}
-        >
-          STRAIGHT
-        </button>
-        <button
-          disabled={match.tileRequests === 0}
-          onClick={() => match.onSelectTrack("RightTurn")}
-        >
-          RIGHT
-        </button>
-      </div>
+      {match.isAlive && !match.isWinner && (
+        <div className="button-row">
+          <button
+            disabled={match.tileRequests === 0}
+            onClick={() => match.onSelectTrack("LeftTurn")}
+          >
+            LEFT
+          </button>
+          <button
+            disabled={match.tileRequests === 0}
+            onClick={() => match.onSelectTrack("Straight")}
+          >
+            STRAIGHT
+          </button>
+          <button
+            disabled={match.tileRequests === 0}
+            onClick={() => match.onSelectTrack("RightTurn")}
+          >
+            RIGHT
+          </button>
+        </div>
+      )}
+      {match.isAlive && match.isWinner && (
+        <h2 className="message">YOU WON!!!</h2>
+      )}
+      {!match.isAlive && !match.isWinner && (
+        <>
+          <h2 className="message">YOU DIED!!!</h2>
+          <button className="button" onClick={() => window.location.reload()}>
+            Play again?
+          </button>
+        </>
+      )}
     </>
   );
 };

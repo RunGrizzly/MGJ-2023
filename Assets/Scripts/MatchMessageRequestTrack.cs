@@ -16,3 +16,13 @@ public class MatchMessageStartGame : MatchMessage<MatchMessageStartGame>
         this.name = name;
     }
 }
+
+public class MatchMessageGameEnd : MatchMessage<MatchMessageGameEnd>
+{
+    public readonly bool isWinner;
+
+    public MatchMessageGameEnd(bool isWinner)
+    {
+        this.isWinner = isWinner;
+    }
+}

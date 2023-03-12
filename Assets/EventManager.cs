@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class BattleStartedEvent : UnityEvent { }
 
 //The battle has ended - pass through the winning train
-public class BattleEndedEvent : UnityEvent<Train> { }
+public class BattleEndedEvent : UnityEvent<(Train, bool)> { }
 public class GridCompletedEvent : UnityEvent<TrackGrid> { }
 public class GridInitialisedEvent : UnityEvent<TrackGrid> { }
 public class BattleReadyEvent : UnityEvent<List<string>> { }

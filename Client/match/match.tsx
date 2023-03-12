@@ -28,6 +28,13 @@ export const useMatch = (match: Match, socket: Socket, host: Presence) => {
       case MatchMessageType.RequestTrack:
         requestTrack();
         break;
+      case MatchMessageType.GameEnded:
+        if (json.isWinner) {
+          setIsWinner(true);
+        } else {
+          setIsAlive(false);
+        }
+        break;
       default:
         break;
     }

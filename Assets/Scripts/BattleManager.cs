@@ -37,6 +37,20 @@ public class BattleManager : MonoBehaviour
         {
             AskPlayerForTrack(train);
         });
+        Brain.ins.EventManager.battleEnded.AddListener(async (tuple) =>
+        {
+            var presence = _connection.BattleConnection.Users.Find(p => p.UserId == tuple.Item1.UserId);
+            await _stateManager.SendMatchStateMessage(MatchMessageType.GameEnded, new MatchMessageGameEnd(tuple.Item2), new List<IUserPresence> { presence });
+
+            var remainingTrains = _trains.Where(t => t != null);
+            if (remainingTrains.Count() == 1)
+            {
+                var winner = _connection.BattleConnection.Users.Find(p => p.UserId == remainingTrains.First().UserId);
+                await _stateManager.SendMatchStateMessage(MatchMessageType.GameEnded, new MatchMessageGameEnd(true), new List<IUserPresence> { winner });
+
+                // RESET GAME STATE
+            }
+        });
     }
     private async Task SearchMatch()
     {
