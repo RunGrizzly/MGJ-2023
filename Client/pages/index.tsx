@@ -151,7 +151,7 @@ const useClient = () => {
       );
     };
     console.log("Searching for match");
-    const ticket = await socket.addMatchmaker("+properties.type:host", 2, 3);
+    const ticket = await socket.addMatchmaker("+properties.type:host", 2, 5);
     setTicket(ticket.ticket);
   }
 

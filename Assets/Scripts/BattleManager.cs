@@ -59,7 +59,7 @@ public class BattleManager : MonoBehaviour
         {
             Debug.LogError("Received error on socket " + error.Message);
         };
-        var ticket = await _connection.Socket.AddMatchmakerAsync("*", 2, 3, new Dictionary<string, string> { { "type", "host" } });
+        var ticket = await _connection.Socket.AddMatchmakerAsync("*", 2, 5, new Dictionary<string, string> { { "type", "host" } });
     }
 
     private async void ReceivedMatchmakerMatched(IMatchmakerMatched matched)
