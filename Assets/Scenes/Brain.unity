@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 781916004}
   - component: {fileID: 781916006}
   - component: {fileID: 781916007}
+  - component: {fileID: 781916008}
   m_Layer: 0
   m_Name: Brain
   m_TagString: Untagged
@@ -294,14 +295,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _connection: {fileID: 11400000, guid: a8698fe4b5ae1264fa9ea24937fc6619, type: 2}
---- !u!81 &781916007
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 781915999}
-  m_Enabled: 1
 --- !u!114 &781916007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,6 +308,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
+--- !u!81 &781916008
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781915999}
+  m_Enabled: 1
 --- !u!1 &890750336
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,12 +365,6 @@ MonoBehaviour:
   _sceneSetupMode: 0
   _sceneSetup:
   - scene:
-      editorAssetGUID: 7fd13de94655a8c4b97ebf96583c2742
-      name: MainMenu
-      _path: Assets/Scenes/MainMenu.unity
-    loadInEditor: 0
-    loadMethod: 3
-  - scene:
       editorAssetGUID: 395d942f234ba6d49991fac0ba423fc5
       name: Lights
       _path: Assets/Scenes/Lights.unity
@@ -382,16 +377,22 @@ MonoBehaviour:
     loadInEditor: 0
     loadMethod: 3
   - scene:
+      editorAssetGUID: 7fd13de94655a8c4b97ebf96583c2742
+      name: MainMenu
+      _path: Assets/Scenes/MainMenu.unity
+    loadInEditor: 0
+    loadMethod: 3
+  - scene:
       editorAssetGUID: dbaa0dc4f95b8454c833fa0d5744ecfa
       name: Camera
       _path: Assets/Scenes/Camera.unity
-    loadInEditor: 1
+    loadInEditor: 0
     loadMethod: 3
   - scene:
       editorAssetGUID: c07168c1cc5dbd749bc67c17d297231f
       name: BattleScene
       _path: Assets/Scenes/BattleScene.unity
-    loadInEditor: 0
+    loadInEditor: 1
     loadMethod: 3
   - scene:
       editorAssetGUID: 9bccf9ae8ef9aeb48a2566407e3f8249

@@ -29,7 +29,7 @@ public class BattleManager : MonoBehaviour
                 train.UserId = userId;
                 _trains.Add(train);
                 var presence = _connection.BattleConnection.Users.Find(p => p.UserId == userId);
-                await _stateManager.SendMatchStateMessage(MatchMessageType.StartGame, new MatchMessageStartGame(train.TrainName), new List<IUserPresence> { presence });
+                _stateManager.SendMatchStateMessage(MatchMessageType.StartGame, new MatchMessageStartGame(train.TrainName), new List<IUserPresence> { presence });
             }
             StartBattle();
         });

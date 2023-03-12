@@ -51,7 +51,7 @@ public class TrackGrid : MonoBehaviour
                 TrackTile tile = Instantiate(GetTile(tileType), new Vector3(x, 0, y), Quaternion.identity).GetComponent<TrackTile>();
                 tile.transform.SetParent(m_tileHolder, true);
                 tile.SetState(new Vector2Int(x, y), orientation);
-                
+
                 if ((x == 1 && y == 1) || (x == 1 && y == GridDims.y - 1) || (x == GridDims.x - 1 && y == 1) ||
                     (x == GridDims.x - 1 && y == GridDims.y - 1))
                 {
@@ -82,33 +82,36 @@ public class TrackGrid : MonoBehaviour
         var spawnLocationTrackTile = spawnLocation.GetComponent<TrackTile>().m_position;
         var direction = Direction.East;
         GameObject firstLocation = null;
-        
-        if(spawnLocationTrackTile.Equals(new Vector2Int(1,1)))
+
+        if (spawnLocationTrackTile.Equals(new Vector2Int(1, 1)))
         {
             direction = Direction.East;
             firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(2, 1));
-        } else if (spawnLocationTrackTile.Equals(new Vector2Int(GridDims.x - 1, GridDims.y - 1)))
+        }
+        else if (spawnLocationTrackTile.Equals(new Vector2Int(GridDims.x - 1, GridDims.y - 1)))
         {
             direction = Direction.West;
             firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(GridDims.x - 2, GridDims.y - 1));
-        } else if (spawnLocationTrackTile.Equals(new Vector2Int(1, GridDims.y - 1)))
+        }
+        else if (spawnLocationTrackTile.Equals(new Vector2Int(1, GridDims.y - 1)))
         {
             direction = Direction.South;
             firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(1, GridDims.y - 2));
-        } else if (spawnLocationTrackTile.Equals(new Vector2Int(GridDims.x - 1, 1)))
+        }
+        else if (spawnLocationTrackTile.Equals(new Vector2Int(GridDims.x - 1, 1)))
         {
             direction = Direction.North;
             firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(GridDims.x - 1, 2));
         }
-        
+
         //var firstLocation = //m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(2, 1));
 
         var startBlock = Instantiate(GetTile("Start"), spawnLocation.transform.position, Quaternion.identity);
         startBlock.GetComponent<TrackTile>().SetState(new Vector2Int((int)spawnLocation.transform.position.x, (int)spawnLocation.transform.position.z), direction);
-        
+
         var straightBlock = Instantiate(GetTile("Straight"), firstLocation.transform.position, Quaternion.identity);
         straightBlock.GetComponent<TrackTile>().SetState(new Vector2Int((int)firstLocation.transform.position.x, (int)firstLocation.transform.position.z), direction);
-        
+
 
         m_gridTiles.Remove(firstLocation);
         m_gridTiles.Remove(spawnLocation);
@@ -120,7 +123,8 @@ public class TrackGrid : MonoBehaviour
 
         var train = Instantiate(Train, new Vector3(startBlock.transform.position.x, 0.8f, startBlock.transform.position.z), Quaternion.identity).GetComponent<Train>();
         train.transform.SetParent(transform);
-        train.SetDestination(firstLocation.transform.position);
+        train.SetDestination(firstLocation.transform.position, direction);
+        //train.m_direction = direction;
 
         ColorSet newColorSet = m_availableColorSets[UnityEngine.Random.Range(0, m_availableColorSets.Count)];
 

@@ -15048,8 +15048,9 @@ MonoBehaviour:
   m_direction: 1
   startMarker: {fileID: 0}
   endMarker: {x: -Infinity, y: -Infinity, z: -Infinity}
-  speed: 0.3
+  speed: 0.5
   UserId: 
+  TrainName: 
 --- !u!1 &7641406702275332385
 GameObject:
   m_ObjectHideFlags: 0

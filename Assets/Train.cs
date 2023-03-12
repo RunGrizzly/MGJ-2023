@@ -50,7 +50,7 @@ public class Train : MonoBehaviour
         if (endMarker != Vector3.negativeInfinity)
         {
             var position = transform.position;
-            if (Vector3.Distance(position, endMarker) >= 0.02)
+            if (Vector2.Distance(new Vector2(position.x, position.z), new Vector2(endMarker.x, endMarker.z)) >= 0.02)
             {
                 switch (m_direction)
                 {
@@ -101,6 +101,7 @@ public class Train : MonoBehaviour
 
     public void Kill()
     {
+        Brain.ins.EventManager.battleEnded.Invoke((this, false));
         m_explodeVFX.Play();
         LeanTween.delayedCall(m_explodeVFX.main.startLifetime.constantMax / 2, () =>
         {
@@ -110,7 +111,6 @@ public class Train : MonoBehaviour
             LeanTween.delayedCall(m_explodeVFX.main.startLifetime.constantMax / 2, () => Destroy(gameObject));
         });
 
-        Brain.ins.EventManager.battleEnded.Invoke((this, false));
     }
 
     public void Decorate(ColorSet newColorSet)
