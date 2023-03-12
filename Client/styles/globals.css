@@ -56,7 +56,7 @@ ul {
   font-weight: 800;
   padding: .5em .8em;
   border-radius: 50px;
-  border: 3px #50fb9d solid;
+  background-color: rgb(101, 255, 160);
 }
 
 .waiting {
