@@ -1,10 +1,11 @@
-namespace DefaultNamespace
+using UnityEngine;
+
+
+public class GameStateController: MonoBehaviour
 {
-    public class GameStateController
-    {
-        public GameState CurrentState = GameState.Waiting;
-    }
+    public GameState currentState = GameState.Waiting;
 }
+
 
 public enum GameState
 {
