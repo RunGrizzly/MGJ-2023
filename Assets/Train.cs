@@ -51,9 +51,10 @@ public class Train : MonoBehaviour
         if (endMarker != Vector3.negativeInfinity)
         {
             var position = transform.position;
-            //We have reached dest  - find new direction
+            //We are in transit
             if (Vector2.Distance(new Vector2(position.x, position.z), new Vector2(endMarker.x, endMarker.z)) >= 0.02)
             {
+
                 switch (m_direction)
                 {
                     case Direction.East:
@@ -69,18 +70,21 @@ public class Train : MonoBehaviour
                         position = new Vector3(position.x, position.y, position.z - speed * Time.deltaTime);
                         break;
                 }
-
                 transform.position = position;
             }
-            //We are in transit
+
             else
             {
+                //We have reached dest  - find new direction
+                Debug.LogFormat("$The train {0} reached destination at {1}", TrainName, new Vector2(endMarker.x, endMarker.z));
+
                 //snap to destination
                 transform.position = new Vector3(endMarker.x, position.y, endMarker.z);
 
                 var currentTile = _trackGrid.GetTileByVector3(endMarker);
                 if (currentTile.CanApproach(m_direction))
                 {
+                    Debug.LogFormat("$The train {0} reached an approachable tile", TrainName);
                     var nextDirection = ChooseNextDirection();
                     var gridTile = nextDirection.Item1;
                     endMarker = new Vector3(gridTile.transform.position.x, transform.position.y, gridTile.transform.position.z);
@@ -90,9 +94,14 @@ public class Train : MonoBehaviour
                 }
                 else
                 {
+                    Debug.LogFormat("$The train {0} reached an unapproachable tile", TrainName);
                     Kill();
                 }
             }
+        }
+        else
+        {
+            Debug.LogFormat("$The train {0} tried to reach negative infinity", TrainName);
         }
     }
 
