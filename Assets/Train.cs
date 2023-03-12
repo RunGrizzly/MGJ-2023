@@ -10,6 +10,7 @@ public class Train : MonoBehaviour
     [SerializeField] private Renderer m_bodyRenderer;
     [SerializeField] private Renderer m_faceRenderer;
     [SerializeField] private TextMeshProUGUI m_label;
+    [SerializeField] private ParticleSystem m_explodeVFX;
     public Direction m_direction = Direction.East;
 
     public Transform startMarker;
@@ -79,6 +80,18 @@ public class Train : MonoBehaviour
                 Brain.ins.EventManager.trainDestinationUpdate?.Invoke(this);
             }
         }
+    }
+
+    public void Kill()
+    {
+        m_explodeVFX.Play();
+        LeanTween.delayedCall(m_explodeVFX.main.startLifetime.constantMax / 2, () =>
+        {
+            m_bodyRenderer.enabled = false;
+            m_faceRenderer.enabled = false;
+            LeanTween.value(1, 0, 0.55f).setEase(LeanTweenType.easeOutQuad).setOnUpdate((val) => m_label.alpha = val);
+            LeanTween.delayedCall(m_explodeVFX.main.startLifetime.constantMax / 2, () => Destroy(gameObject));
+        });
     }
 
     private (Vector3, Direction) ChooseNextDirection()
