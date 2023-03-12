@@ -42,12 +42,12 @@ public class TrackGrid : MonoBehaviour
             {
                 var tileType = "Empty";
                 var orientation = Direction.North;
-                
+
                 if (x == 0 || y == 0 || x == GridDims.x || y == GridDims.y)
                 {
                     tileType = "Blank";
                 }
-                
+
                 TrackTile tile = Instantiate(GetTile(tileType), new Vector3(x, 0, y), Quaternion.identity).GetComponent<TrackTile>();
                 tile.transform.SetParent(m_tileHolder, true);
                 tile.SetState(new Vector2Int(x, y), orientation);

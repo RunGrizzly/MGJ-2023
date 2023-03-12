@@ -1,35 +1,51 @@
 import Head from "next/head";
-import styles from "../styles/Home.module.css";
 import { Client, Match, Presence, Session } from "@heroiclabs/nakama-js";
 import { useEffect, useState } from "react";
 import { useInterval } from "usehooks-ts";
 import { useMatch } from "../match/match";
 
+const getState = (client: ReturnType<typeof useClient>) => {
+  if (!client.match && !client.ticket) {
+    return "home";
+  } else if (!client.match && client.ticket) {
+    return "waiting";
+  } else if (client.match) {
+    return "ingame";
+  } else {
+    return "confused";
+  }
+};
+
 export default function Home() {
   const client = useClient();
+  const state = getState(client);
+
+  const Join = () => (
+    <button
+      className="button"
+      disabled={!client.connected}
+      onClick={() => client.join()}
+    >
+      Join
+    </button>
+  );
+  const Waiting = () => <h2 className="waiting">Waiting for match!</h2>;
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <>
+      <h1 className="title">RAIL RUMBLE</h1>
+      <div className={"container"}>
+        <Head>
+          <title>RAIL RUMBLE</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <main>
-        <h1>TRONS</h1>
-        <button disabled={!client.connected} onClick={() => client.join()}>
-          Join
-        </button>
-        <p>
-          {client.isMatchInProgress
-            ? client.match
-              ? "YOU ARE IN THE MATCH"
-              : "MATCH ALREADY IN PROGRESS"
-            : "JOIN THE MATCH"}
-        </p>
-        {client.match && <InGame client={client} />}
-      </main>
-    </div>
+        {state === "home" && <Join />}
+        {state === "waiting" && <Waiting />}
+        {state === "ingame" && <InGame client={client} />}
+        {state === "confused" && <h2>SEND HELP</h2>}
+      </div>
+    </>
   );
 }
 
@@ -38,24 +54,46 @@ const InGame = ({ client }: Props) => {
   const match = useMatch(client.match, socket, client.host);
 
   return (
-    <div>
-      <h2>LETS GO LETS GO</h2>
-      {match.tileRequests > 0 && (
-        <div>
-          <button onClick={() => match.onSelectTrack("LeftTurn")}>LEFT</button>
-          <button onClick={() => match.onSelectTrack("Straight")}>
+    <>
+      <h2 className="name">{match.name}</h2>
+      {match.isAlive && !match.isWinner && (
+        <div className="button-row">
+          <button
+            disabled={match.tileRequests === 0}
+            onClick={() => match.onSelectTrack("LeftTurn")}
+          >
+            LEFT
+          </button>
+          <button
+            disabled={match.tileRequests === 0}
+            onClick={() => match.onSelectTrack("Straight")}
+          >
             STRAIGHT
           </button>
-          <button onClick={() => match.onSelectTrack("RightTurn")}>
+          <button
+            disabled={match.tileRequests === 0}
+            onClick={() => match.onSelectTrack("RightTurn")}
+          >
             RIGHT
           </button>
         </div>
       )}
-    </div>
+      {match.isAlive && match.isWinner && (
+        <h2 className="message">YOU WON!!!</h2>
+      )}
+      {!match.isAlive && !match.isWinner && (
+        <>
+          <h2 className="message">YOU DIED!!!</h2>
+          <button className="button" onClick={() => window.location.reload()}>
+            Play again?
+          </button>
+        </>
+      )}
+    </>
   );
 };
 
-const client = new Client("defaultkey", "localhost", "7350");
+const client = new Client("defaultkey", "172.25.120.251", "7350");
 const socket = client.createSocket();
 
 const useClient = () => {
@@ -65,6 +103,7 @@ const useClient = () => {
   const [isMatchInProgress, setMatchInProgress] = useState(true);
   const [match, setMatch] = useState<Match | null>(null);
   const [host, setHost] = useState<Presence>();
+  const [ticket, setTicket] = useState("");
 
   useEffect(() => {
     function onDisconnect(e: Event) {
@@ -112,7 +151,8 @@ const useClient = () => {
       );
     };
     console.log("Searching for match");
-    await socket.addMatchmaker("+properties.type:host", 2, 3);
+    const ticket = await socket.addMatchmaker("+properties.type:host", 2, 5);
+    setTicket(ticket.ticket);
   }
 
   useEffect(() => {
@@ -137,5 +177,6 @@ const useClient = () => {
     isMatchInProgress,
     match,
     host,
+    ticket,
   };
 };

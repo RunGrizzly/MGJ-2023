@@ -10,6 +10,7 @@ export const useMatch = (match: Match, socket: Socket, host: Presence) => {
   const [isAlive, setIsAlive] = useState(true);
   const [tileRequests, setTileRequests] = useState(0);
   const [isWinner, setIsWinner] = useState(false);
+  const [name, setName] = useState("");
 
   socket.onmatchdata = receiveMatchState;
 
@@ -22,9 +23,17 @@ export const useMatch = (match: Match, socket: Socket, host: Presence) => {
 
     switch (matchData.op_code) {
       case MatchMessageType.StartGame:
+        setName(json.name);
         break;
       case MatchMessageType.RequestTrack:
         requestTrack();
+        break;
+      case MatchMessageType.GameEnded:
+        if (json.isWinner) {
+          setIsWinner(true);
+        } else {
+          setIsAlive(false);
+        }
         break;
       default:
         break;
@@ -58,5 +67,6 @@ export const useMatch = (match: Match, socket: Socket, host: Presence) => {
     isWinner,
     onSelectTrack,
     tileRequests,
+    name,
   };
 };

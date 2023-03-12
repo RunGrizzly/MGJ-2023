@@ -9,6 +9,27 @@ public class SceneLoader : MonoBehaviour
         LoadMainMenu();
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "MainMenu")
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("MainMenu"));
+        }
+        else if (scene.name == "BattleScene")
+        {
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("BattleScene"));
+        }
+    }
+
     public void LoadMainMenu()
     {
         UnloadScenes(new List<string> { "UI", "BattleScene", "Camera" });

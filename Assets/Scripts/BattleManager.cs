@@ -20,7 +20,7 @@ public class BattleManager : MonoBehaviour
             _grid = grid;
             await SearchMatch();
         });
-        Brain.ins.EventManager.battleReady.AddListener(userIds =>
+        Brain.ins.EventManager.battleReady.AddListener(async userIds =>
         {
             _trains = new List<Train>();
             foreach (var userId in userIds)
@@ -28,12 +28,28 @@ public class BattleManager : MonoBehaviour
                 var train = _grid.SpawnTrain();
                 train.UserId = userId;
                 _trains.Add(train);
+                var presence = _connection.BattleConnection.Users.Find(p => p.UserId == userId);
+                await _stateManager.SendMatchStateMessage(MatchMessageType.StartGame, new MatchMessageStartGame(train.TrainName), new List<IUserPresence> { presence });
             }
             StartBattle();
         });
         Brain.ins.EventManager.trainDestinationUpdate.AddListener(train =>
         {
             AskPlayerForTrack(train);
+        });
+        Brain.ins.EventManager.battleEnded.AddListener(async (tuple) =>
+        {
+            var presence = _connection.BattleConnection.Users.Find(p => p.UserId == tuple.Item1.UserId);
+            await _stateManager.SendMatchStateMessage(MatchMessageType.GameEnded, new MatchMessageGameEnd(tuple.Item2), new List<IUserPresence> { presence });
+
+            var remainingTrains = _trains.Where(t => t != null);
+            if (remainingTrains.Count() == 1)
+            {
+                var winner = _connection.BattleConnection.Users.Find(p => p.UserId == remainingTrains.First().UserId);
+                await _stateManager.SendMatchStateMessage(MatchMessageType.GameEnded, new MatchMessageGameEnd(true), new List<IUserPresence> { winner });
+
+                // RESET GAME STATE
+            }
         });
     }
     private async Task SearchMatch()
@@ -43,7 +59,7 @@ public class BattleManager : MonoBehaviour
         {
             Debug.LogError("Received error on socket " + error.Message);
         };
-        var ticket = await _connection.Socket.AddMatchmakerAsync("*", 2, 3, new Dictionary<string, string> { { "type", "host" } });
+        var ticket = await _connection.Socket.AddMatchmakerAsync("*", 2, 5, new Dictionary<string, string> { { "type", "host" } });
     }
 
     private async void ReceivedMatchmakerMatched(IMatchmakerMatched matched)
