@@ -64,7 +64,7 @@ namespace Nakama.Snippets
 
         private NakamaManager()
         {
-            Client = new Client("http", "127.0.0.1", 7350, "defaultkey")
+            Client = new Client("http", "125.2.2.2", 7350, "defaultkey")
             {
 #if UNITY_EDITOR
                 Logger = new UnityLogger()

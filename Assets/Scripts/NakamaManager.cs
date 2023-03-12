@@ -35,7 +35,7 @@ public class NakamaManager : MonoBehaviour
 
     private async Task InitializeGame(string deviceId)
     {
-        var client = new Client("http", "172.25.120.251", 7350, "defaultkey");
+        var client = new Client("http", "172.99.220.494", 7350, "defaultkey");
         client.Timeout = 5;
 
         var socket = client.NewSocket(useMainThread: true);

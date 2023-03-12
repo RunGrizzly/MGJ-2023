@@ -897,6 +897,11 @@ PrefabInstance:
       propertyPath: StepTime
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7592167058657465675, guid: 2f1f2eebc2fb3d242b40459de69a67f5,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e5c2bb29f97cdc94ba2c648489aa8ab8, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f1f2eebc2fb3d242b40459de69a67f5, type: 3}
 --- !u!224 &5081577146947055718 stripped

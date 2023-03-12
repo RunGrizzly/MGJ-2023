@@ -48,6 +48,11 @@ MonoBehaviour:
   m_position: {x: -1, y: -1}
   m_isReplaceable: 0
   m_orientation: 0
+  m_popHeight: 0.75
+  m_popEase: 34
+  m_scaleEase: 34
+  m_scaleSpeed: 0.45
+  m_popSpeed: 0.75
 --- !u!1 &4842097028167846998
 GameObject:
   m_ObjectHideFlags: 0

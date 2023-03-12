@@ -5,6 +5,11 @@ public abstract class TrackTile : MonoBehaviour
     public Vector2Int m_position;
     [SerializeField] protected bool m_isReplaceable;
     [SerializeField] public Direction m_orientation = Direction.North;
+    [SerializeField] private float m_popHeight = 0.2f;
+    [SerializeField] private LeanTweenType m_popEase = LeanTweenType.notUsed;
+    [SerializeField] private LeanTweenType m_scaleEase = LeanTweenType.notUsed;
+    [SerializeField] private float m_scaleSpeed = 0.45f;
+    [SerializeField] private float m_popSpeed = 0.75f;
 
     protected TrackTile()
     {
@@ -19,7 +24,8 @@ public abstract class TrackTile : MonoBehaviour
 
     private void StartAnimation()
     {
-        LeanTween.scale(gameObject, Vector3.one * 1.25f, 0.75f).setEase(LeanTweenType.punch);
+        LeanTween.scale(gameObject, Vector3.one * 1.25f, m_scaleSpeed).setEase(m_scaleEase);
+        LeanTween.moveY(gameObject, m_popHeight, m_popSpeed).setEase(m_popEase);
     }
 
     public void SetState(Vector2Int position, Direction orientation = Direction.North)
