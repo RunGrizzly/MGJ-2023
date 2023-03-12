@@ -95,34 +95,10 @@ public class NakamaManager : MonoBehaviour
 
     private async void OnSocketConnected()
     {
-        await StartBattle();
-    }
-
-    private async Task StartBattle()
-    {
-        _connection.Socket.ReceivedMatchmakerMatched += ReceivedMatchmakerMatched;
-        _connection.Socket.ReceivedError += error =>
-        {
-            Debug.LogError("Received error on socket " + error.Message);
-        };
-        var ticket = await _connection.Socket.AddMatchmakerAsync("*", 2, 3, new Dictionary<string, string> { { "type", "host" } });
+        //await StartBattle();
     }
 
 
-    private async void ReceivedMatchmakerMatched(IMatchmakerMatched matched)
-    {
-        Debug.Log("We have been match made");
-        _connection.BattleConnection = new BattleConnection(matched);
-        var match = await _connection.Socket.JoinMatchAsync(matched);
-        Debug.Log("We have joined match");
-        _connection.BattleConnection.MatchId = match.Id;
-        _connection.BattleConnection.Users = matched.Users.Select(u => u.Presence).ToList();
-        _stateManager = new GameStateManager(_connection);
-        _connection.BattleConnection.GameStateManager = _stateManager;
-
-        //StartCoroutine(Send());
-        Brain.ins.EventManager.battleReady.Invoke(matched.Users.Where(user => user.Presence.UserId != matched.Self.Presence.UserId).Select(user => user.Presence.UserId).ToList());
-    }
 
     private GameStateManager _stateManager;
 

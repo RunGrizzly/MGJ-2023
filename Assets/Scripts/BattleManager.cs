@@ -2,20 +2,23 @@ using UnityEngine;
 using Nakama;
 using System.Linq;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 public class BattleManager : MonoBehaviour
 {
     [SerializeField] private GameConnection _connection;
     private TrackGrid _grid;
+    private GameStateManager _stateManager;
 
     private List<Train> _trains;
 
     // Start is called before the first frame update
     protected async void Start()
     {
-        Brain.ins.EventManager.gridCompleted.AddListener((grid) =>
+        Brain.ins.EventManager.gridCompleted.AddListener(async (grid) =>
         {
             _grid = grid;
+            await SearchMatch();
         });
         Brain.ins.EventManager.battleReady.AddListener(userIds =>
         {
@@ -32,6 +35,29 @@ public class BattleManager : MonoBehaviour
         {
             AskPlayerForTrack(train);
         });
+    }
+    private async Task SearchMatch()
+    {
+        _connection.Socket.ReceivedMatchmakerMatched += ReceivedMatchmakerMatched;
+        _connection.Socket.ReceivedError += error =>
+        {
+            Debug.LogError("Received error on socket " + error.Message);
+        };
+        var ticket = await _connection.Socket.AddMatchmakerAsync("*", 2, 3, new Dictionary<string, string> { { "type", "host" } });
+    }
+
+    private async void ReceivedMatchmakerMatched(IMatchmakerMatched matched)
+    {
+        Debug.Log("We have been match made");
+        _connection.BattleConnection = new BattleConnection(matched);
+        var match = await _connection.Socket.JoinMatchAsync(matched);
+        Debug.Log("We have joined match");
+        _connection.BattleConnection.MatchId = match.Id;
+        _connection.BattleConnection.Users = matched.Users.Select(u => u.Presence).ToList();
+        _stateManager = new GameStateManager(_connection);
+        _connection.BattleConnection.GameStateManager = _stateManager;
+
+        Brain.ins.EventManager.battleReady.Invoke(matched.Users.Where(user => user.Presence.UserId != matched.Self.Presence.UserId).Select(user => user.Presence.UserId).ToList());
     }
 
     // Update is called once per frame
