@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Tiles;
 using TMPro;
 using UnityEngine;
 
@@ -81,7 +82,22 @@ public class Train : MonoBehaviour
                 //snap to destination
                 transform.position = new Vector3(endMarker.x, position.y, endMarker.z);
 
+                //Nuclear option
+                //Get the tile type
+                //If empty
+                //Kill player
                 var currentTile = _trackGrid.GetTileByVector3(endMarker);
+
+                if (currentTile is EmptyTile)
+                {
+                    Kill();
+                }
+
+                // if (currentTile.GetComponent<EmptyTile>())
+                // {
+                //     Kill();
+                // }
+
                 if (currentTile.CanApproach(m_direction))
                 {
                     Debug.LogFormat("$The train {0} reached an approachable tile", TrainName);
