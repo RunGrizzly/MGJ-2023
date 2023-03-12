@@ -87,7 +87,7 @@ public class Train : MonoBehaviour
                 }
                 else
                 {
-                    Destroy(gameObject);
+                    Kill();
                 }
 
             }
