@@ -69,6 +69,7 @@ ul {
   text-align: center;
   font-weight: 600;
   text-transform: uppercase;
+  padding: .5em;
 }
 
 .button-row {

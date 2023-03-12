@@ -23,6 +23,7 @@ public class Train : MonoBehaviour
 
     private TrackGrid _trackGrid;
     public string UserId;
+    public string TrainName;
 
     private void Start()
     {
@@ -124,7 +125,7 @@ public class Train : MonoBehaviour
         m_faceRenderer.material = newFaceMaterial;
 
         m_label.text = newColorSet.Name;
-
+        TrainName = newColorSet.Name;
     }
 
     private void SetRotation(Direction direction)

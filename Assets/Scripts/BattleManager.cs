@@ -20,7 +20,7 @@ public class BattleManager : MonoBehaviour
             _grid = grid;
             await SearchMatch();
         });
-        Brain.ins.EventManager.battleReady.AddListener(userIds =>
+        Brain.ins.EventManager.battleReady.AddListener(async userIds =>
         {
             _trains = new List<Train>();
             foreach (var userId in userIds)
@@ -28,6 +28,8 @@ public class BattleManager : MonoBehaviour
                 var train = _grid.SpawnTrain();
                 train.UserId = userId;
                 _trains.Add(train);
+                var presence = _connection.BattleConnection.Users.Find(p => p.UserId == userId);
+                await _stateManager.SendMatchStateMessage(MatchMessageType.StartGame, new MatchMessageStartGame(train.TrainName), new List<IUserPresence> { presence });
             }
             StartBattle();
         });
