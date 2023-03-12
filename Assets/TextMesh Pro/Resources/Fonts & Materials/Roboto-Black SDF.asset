@@ -601,6 +601,20 @@ MonoBehaviour:
       m_Height: 50
     m_Scale: 1
     m_AtlasIndex: 0
+  - m_Index: 72
+    m_Metrics:
+      m_Width: 44.078125
+      m_Height: 68.375
+      m_HorizontalBearingX: 2.28125
+      m_HorizontalBearingY: 67.5
+      m_HorizontalAdvance: 50.625
+    m_GlyphRect:
+      m_X: 10
+      m_Y: 381
+      m_Width: 45
+      m_Height: 69
+    m_Scale: 1
+    m_AtlasIndex: 0
   - m_Index: 73
     m_Metrics:
       m_Width: 44.515625
@@ -867,20 +881,6 @@ MonoBehaviour:
       m_Height: 16
     m_Scale: 1
     m_AtlasIndex: 0
-  - m_Index: 72
-    m_Metrics:
-      m_Width: 44.078125
-      m_Height: 68.375
-      m_HorizontalBearingX: 2.28125
-      m_HorizontalBearingY: 67.5
-      m_HorizontalAdvance: 50.625
-    m_GlyphRect:
-      m_X: 10
-      m_Y: 381
-      m_Width: 45
-      m_Height: 69
-    m_Scale: 1
-    m_AtlasIndex: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 32
@@ -999,6 +999,10 @@ MonoBehaviour:
     m_GlyphIndex: 71
     m_Scale: 1
   - m_ElementType: 1
+    m_Unicode: 100
+    m_GlyphIndex: 72
+    m_Scale: 1
+  - m_ElementType: 1
     m_Unicode: 101
     m_GlyphIndex: 73
     m_Scale: 1
@@ -1073,10 +1077,6 @@ MonoBehaviour:
   - m_ElementType: 1
     m_Unicode: 8230
     m_GlyphIndex: 399
-    m_Scale: 1
-  - m_ElementType: 1
-    m_Unicode: 100
-    m_GlyphIndex: 72
     m_Scale: 1
   m_AtlasTextures:
   - {fileID: -2170156346986228023}

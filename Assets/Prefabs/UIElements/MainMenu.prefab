@@ -355,7 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: e46b4f99eda3b444bb766c3b3cb4d66a, type: 2}
-  m_Color: {r: 0.25098038, g: 1, b: 0.5998968, a: 1}
+  m_Color: {r: 1, g: 0.5252188, b: 0.23270434, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -944,6 +944,7 @@ GameObject:
   - component: {fileID: 675325556451003182}
   - component: {fileID: 675325556451003176}
   - component: {fileID: 675325556451003177}
+  - component: {fileID: 7114673198524441560}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -999,18 +1000,18 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Train game
+  m_text: RAIL RUMBLE
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 517cba10aac0365479d4a8a9f43be711, type: 2}
-  m_sharedMaterial: {fileID: 1022598355819762285, guid: 517cba10aac0365479d4a8a9f43be711,
+  m_fontAsset: {fileID: 11400000, guid: ae709d2dddf9c4643a3a0eddf53b976a, type: 2}
+  m_sharedMaterial: {fileID: -1154515041077561547, guid: ae709d2dddf9c4643a3a0eddf53b976a,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294935040
-  m_fontColor: {r: 0, g: 0.5111594, b: 1, a: 1}
+    rgba: 4292888362
+  m_fontColor: {r: 0.1627803, g: 0.2787106, b: 0.8773585, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1027,7 +1028,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 104.55
+  m_fontSize: 162.4
   m_fontSizeBase: 93
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1069,6 +1070,21 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7114673198524441560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 675325556451003183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27036fdbc8ce2784cb1e6976ce45f065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeSpeed: 1
+  RolloverCharacterSpread: 10
+  ColorTint: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &675325556473526257
 GameObject:
   m_ObjectHideFlags: 0

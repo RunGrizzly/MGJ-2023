@@ -34,60 +34,31 @@ public class TrackGrid : MonoBehaviour
 
         Brain.ins.EventManager.gridInitialised.Invoke(this);
 
-        for (int x = 0; x < GridDims.x; x++)
+        for (int x = 0; x < GridDims.x + 1; x++)
         {
-            for (int y = 0; y < GridDims.y; y++)
+            for (int y = 0; y < GridDims.y + 1; y++)
             {
                 var tileType = "Empty";
                 var orientation = Direction.North;
-                // if (x == 0 && y == 0)
-                // {
-                //     tileType = "Start";
-                //     orientation = Direction.East;
-                //
-                // }
-                // else if (x == 1 && y == 0)
-                // {
-                //     tileType = "Straight";
-                //     orientation = Direction.East;
-                // }
-                // else if (x == 2 && y == 0)
-                // {
-                //     tileType = "LeftTurn";
-                //     orientation = Direction.East;
-                // }
-                // else if (x == 2 && y < 3)
-                // {
-                //     tileType = "Straight";
-                // }
-                // else if (x == 2 && y == 3)
-                // {
-                //     tileType = "LeftTurn";
-                // }
-                // else if (x == 1 && y == 3)
-                // {
-                //     tileType = "RightTurn";
-                //     orientation = Direction.West;
-                // }
-                // else if (x == 1 && y is > 3 and < 6)
-                // {
-                //     tileType = "Straight";
-                // }
-
+                
+                if (x == 0 || y == 0 || x == GridDims.x || y == GridDims.y)
+                {
+                    tileType = "Blank";
+                }
+                
                 TrackTile tile = Instantiate(GetTile(tileType), new Vector3(x, 0, y), Quaternion.identity).GetComponent<TrackTile>();
                 tile.transform.SetParent(m_tileHolder, true);
                 tile.SetState(new Vector2Int(x, y), orientation);
 
-                if (x == 0 && y == 0)
+                if (x == 1 && y == 1)
                 {
                     limits.BottomLeft = tile.transform;
                 }
-                else if (x == GridDims.x - 1 && y == GridDims.y - 1)
+                else if (x == GridDims.x && y == GridDims.y)
                 {
                     limits.TopRight = tile.transform;
                 }
                 m_gridTiles.Add(tile.gameObject);
-
 
                 yield return new WaitForSeconds(m_generationSpeed);
             }
@@ -110,13 +81,13 @@ public class TrackGrid : MonoBehaviour
 
     public Train SpawnTrain()
     {
-        var firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 0));
-        var spawnLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(0, 0));
+        var spawnLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(1, 1));
+        var firstLocation = m_gridTiles.Find(go => go.GetComponent<TrackTile>().m_position == new Vector2Int(2, 1));
 
-        var startBlock = Instantiate(GetTile("Start"), Vector3.zero, Quaternion.identity);
-        startBlock.GetComponent<TrackTile>().SetState(new Vector2Int(0, 0), Direction.East);
+        var startBlock = Instantiate(GetTile("Start"), spawnLocation.transform.position, Quaternion.identity);
+        startBlock.GetComponent<TrackTile>().SetState(new Vector2Int(1, 1), Direction.East);
         var straightBlock = Instantiate(GetTile("Straight"), firstLocation.transform.position, Quaternion.identity);
-        straightBlock.GetComponent<TrackTile>().SetState(new Vector2Int(0, 0), Direction.East);
+        straightBlock.GetComponent<TrackTile>().SetState(new Vector2Int(2, 1), Direction.East);
 
         m_gridTiles.Remove(firstLocation);
         m_gridTiles.Remove(spawnLocation);
@@ -125,7 +96,7 @@ public class TrackGrid : MonoBehaviour
         m_gridTiles.Add(startBlock);
         m_gridTiles.Add(straightBlock);
 
-        var train = Instantiate(Train, new Vector3(0, 0.8f, 0), Quaternion.identity).GetComponent<Train>();
+        var train = Instantiate(Train, new Vector3(1, 0.8f, 1), Quaternion.identity).GetComponent<Train>();
         train.transform.SetParent(transform);
         train.SetDestination(firstLocation.transform.position);
 
