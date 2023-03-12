@@ -99,6 +99,18 @@ public class Train : MonoBehaviour
         return _trackGrid.GetNextTile(transform.position, m_direction);
     }
 
+    public void Kill()
+    {
+        m_explodeVFX.Play();
+        LeanTween.delayedCall(m_explodeVFX.main.startLifetime.constantMax / 2, () =>
+        {
+            m_bodyRenderer.enabled = false;
+            m_faceRenderer.enabled = false;
+            LeanTween.value(1, 0, 0.55f).setEase(LeanTweenType.easeOutQuad).setOnUpdate((val) => m_label.alpha = val);
+            LeanTween.delayedCall(m_explodeVFX.main.startLifetime.constantMax / 2, () => Destroy(gameObject));
+        });
+    }
+
     public void Decorate(ColorSet newColorSet)
     {
         Material newBodyMaterial = new Material(m_bodyRenderer.sharedMaterial);
