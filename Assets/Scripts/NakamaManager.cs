@@ -11,6 +11,7 @@ public enum MatchMessageType
     StartGame = 1,
     RequestTrack = 2,
     TrackSelected = 3,
+    GameEnded = 4,
 }
 
 public class NakamaManager : MonoBehaviour

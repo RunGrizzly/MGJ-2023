@@ -110,6 +110,8 @@ public class Train : MonoBehaviour
             LeanTween.value(1, 0, 0.55f).setEase(LeanTweenType.easeOutQuad).setOnUpdate((val) => m_label.alpha = val);
             LeanTween.delayedCall(m_explodeVFX.main.startLifetime.constantMax / 2, () => Destroy(gameObject));
         });
+
+        Brain.ins.EventManager.battleEnded.Invoke((this, false));
     }
 
     public void Decorate(ColorSet newColorSet)

@@ -4,5 +4,6 @@ export const MatchMessageType = {
   StartGame: 1,
   RequestTrack: 2,
   TrackSelected: 3,
+  GameEnded: 4,
 } as const;
 export type MatchMessage<T> = { type: MatchMessageType; data?: T };
